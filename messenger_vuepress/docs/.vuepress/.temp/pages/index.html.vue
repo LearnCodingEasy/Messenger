@@ -15,7 +15,15 @@
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h6 id="add-all-new-and-changed-files-to-the-staging-area" tabindex="-1"><a class="header-anchor" href="#add-all-new-and-changed-files-to-the-staging-area"><span>Add all new and changed files to the Staging Area.</span></a></h6>
 <div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre v-pre><code><span class="line">git add *</span>
 <span class="line"></span></code></pre>
-<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><hr>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h6 id="this-command-sends-the-file-from-the-staging-area-to-the-local-repo" tabindex="-1"><a class="header-anchor" href="#this-command-sends-the-file-from-the-staging-area-to-the-local-repo"><span>This command sends the file from the Staging Area to the Local Repo.</span></a></h6>
+<div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">git commit -m &quot;Commit Explain Code&quot;</span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h6 id="this-command-sends-files-from-local-repo-to-remote-repo" tabindex="-1"><a class="header-anchor" href="#this-command-sends-files-from-local-repo-to-remote-repo"><span>This command sends files from (Local Repo) to (Remote Repo).</span></a></h6>
+<div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">git push origin main</span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h6 id="" tabindex="-1"><a class="header-anchor" href="#"><span></span></a></h6>
+<h6 id="-1" tabindex="-1"><a class="header-anchor" href="#-1"><span></span></a></h6>
+<hr>
 <hr>
 <hr>
 <hr>

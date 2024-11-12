@@ -32,6 +32,22 @@ git status
 git add *
 ```
 
+###### This command sends the file from the Staging Area to the Local Repo.
+
+```cmd
+git commit -m "Commit Explain Code"
+```
+
+###### This command sends files from (Local Repo) to (Remote Repo).
+
+```cmd
+git push origin main
+```
+
+######
+
+######
+
 ---
 
 ---
