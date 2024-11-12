@@ -2074,11 +2074,25 @@ screenshots
 │ │ | ├── 🖼️ messenger_icon_144x144.png
 │ │ | ├── 🖼️ messenger_icon_152x152.png
 │ │ | ├── 🖼️ messenger_icon_192x192.png
+│ │ | ├── 🖼️ messenger_icon_256x256.png
 │ │ | ├── 🖼️ messenger_icon_384x384.png
 │ │ | ├── 🖼️ messenger_icon_512x512.png
 │ | ├── screenshots/
 │ │ | ├── 🖼️ screenshots.png
 
+```
+
+```
+messenger_icon_72x72
+messenger_icon_96x96
+messenger_icon_128x128
+messenger_icon_144x144
+messenger_icon_152x152
+messenger_icon_192x192
+messenger_icon_256x256
+messenger_icon_384x384
+messenger_icon_512x512
+screenshots_640x480
 ```
 
 ###### 👉️ Go To Website To Resize Image
@@ -2249,6 +2263,30 @@ export const useUserStore = defineStore({
 
 ```
 cheang App Name [ messenger | ]
+```
+
+### 🌊 Run Vue
+
+###### Run Vue
+
+```cmd
+cd messenger_vue
+```
+
+```cmd
+npm install
+```
+
+```cmd
+npm run format
+```
+
+```cmd
+npm run build
+```
+
+```cmd
+npm run dev
 ```
 
 ### 📝 Page Page Not Found
