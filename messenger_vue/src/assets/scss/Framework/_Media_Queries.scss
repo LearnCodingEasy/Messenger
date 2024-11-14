@@ -1,0 +1,52 @@
+/* Media Queries For All Screen */
+@mixin MediaQueries($Media) {
+  @if $Media == xxs {
+    @media screen and (max-width: 568px) {
+      @content;
+    }
+  } @else if $Media == Xs {
+    @media screen and (min-width: 569px) and (max-width: 767px) {
+      @content;
+    }
+  } @else if $Media == Md {
+    @media screen and (min-width: 768px) and (max-width: 991px) {
+      @content;
+    }
+  } @else if $Media == Lg {
+    @media screen and (min-width: 992px) and (max-width: 1199px) {
+      @content;
+    }
+  } @else if $Media == Xlg {
+    @media screen and (min-width: 1200px) and (max-width: 1399px) {
+      @content;
+    }
+  } @else if $Media == Xxlg {
+    @media screen and (min-width: 1400px) {
+      @content;
+    }
+  } @else if $Media == Mobile {
+    @media screen and (max-width: 568px) {
+      @content;
+    }
+  } @else if $Media == Tablet {
+    @media screen and (min-width: 569px) and (max-width: 767px) {
+      @content;
+    }
+  } @else if $Media == laptop {
+    @media screen and (min-width: 768px) and (max-width: 991px) {
+      @content;
+    }
+  } @else if $Media == laptopLg {
+    @media screen and (min-width: 992px) and (max-width: 1199px) {
+      @content;
+    }
+  } @else if $Media == Desktop {
+    @media screen and (min-width: 1200px) and (max-width: 1399px) {
+      @content;
+    }
+  } @else if $Media == DesktopLg {
+    @media screen and (min-width: 1400px) {
+      @content;
+    }
+  }
+}

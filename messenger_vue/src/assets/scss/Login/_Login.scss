@@ -1,0 +1,685 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.wrapper_page_login {
+  padding: 0;
+  margin: 0;
+  height: 99.99vh;
+  max-height: 100vh;
+  overflow: hidden;
+  background-image: linear-gradient(to right, #5b66f6, #e54da4);
+  .inner_page_login {
+    height: 100%;
+    .container {
+      height: 100%;
+      .wrapper_content_page_login {
+        height: 100%;
+        .inner_content_page_login {
+          position: relative;
+          height: 85%;
+          width: 100%;
+          margin: auto;
+          display: grid;
+          grid-gap: 5%;
+          justify-content: space-between;
+          align-items: center;
+          // screen and (max-width: 568px)
+          // @include MediaQueries(Xxs) {}
+          @include MediaQueries(Mobile) {
+            // background-color: #ffa704;
+          }
+          // screen and (min-width: 569px) and (max-width: 767px)
+          // @include MediaQueries(Xs) {}
+          @include MediaQueries(Tablet) {
+            // background-color: #b3f5b3;
+          }
+          // screen and (min-width: 768px) and (max-width: 991px)
+          // @include MediaQueries(Md) {}
+          @include MediaQueries(laptop) {
+            // background-color: #b3d4f5;
+          }
+          // screen and (min-width: 992px) and (max-width: 1199px)
+          // @include MediaQueries(Lg) {  }
+          @include MediaQueries(laptopLg) {
+          }
+          // screen and (min-width: 1200px) and (max-width: 1399px)
+          // @include MediaQueries(Xlg) {}
+          @include MediaQueries(Desktop) {
+            grid-template-columns: repeat(auto-fill, minmax(35%, 1fr));
+          }
+          // screen and (min-width: 1400px)
+          // @include MediaQueries(Xxlg) {}
+          @include MediaQueries(DesktopLg) {
+            grid-template-columns: repeat(auto-fill, minmax(35%, 1fr));
+          }
+
+          .mobile_body {
+            border: 0.5rem solid #130e0e;
+            border-radius: 32px;
+            -webkit-border-radius: 32px;
+            -moz-border-radius: 32px;
+            -ms-border-radius: 32px;
+            -o-border-radius: 32px;
+            height: 100%;
+            margin: auto;
+            position: relative;
+            position: relative;
+            // screen and (max-width: 568px)
+            // @include MediaQueries(Xxs) {}
+            @include MediaQueries(Mobile) {
+              &::after {
+                content: '📱 568';
+                position: absolute;
+                top: 0%;
+                left: 0px;
+                border-radius: 0.5rem;
+                z-index: 7;
+                font-size: 20px;
+                font-weight: bold;
+                background-color: #130e0e;
+                color: #fff;
+                padding: 10px 15px;
+              }
+            }
+            // screen and (min-width: 569px) and (max-width: 767px)
+            // @include MediaQueries(Xs) {}
+            @include MediaQueries(Tablet) {
+              &::after {
+                content: '📱 567 767';
+                position: absolute;
+                top: 0%;
+                left: 0px;
+                border-radius: 0.5rem;
+                z-index: 7;
+                font-size: 20px;
+                font-weight: bold;
+                background-color: #130e0e;
+                color: #fff;
+                padding: 10px 15px;
+              }
+            }
+            // screen and (min-width: 768px) and (max-width: 991px)
+            // @include MediaQueries(Md) {}
+            @include MediaQueries(laptop) {
+              &::after {
+                content: '💻 768 991';
+                position: absolute;
+                top: 0%;
+                left: 0px;
+                border-radius: 0.5rem;
+                z-index: 7;
+                font-size: 20px;
+                font-weight: bold;
+                background-color: #130e0e;
+                color: #fff;
+                padding: 10px 15px;
+              }
+            }
+            // screen and (min-width: 992px) and (max-width: 1199px)
+            // @include MediaQueries(Lg) {}
+            @include MediaQueries(laptopLg) {
+              &::after {
+                content: '💻➕ 992 1199';
+                position: absolute;
+                top: 0%;
+                left: 0px;
+                border-radius: 0.5rem;
+                z-index: 7;
+                font-size: 20px;
+                font-weight: bold;
+                background-color: #130e0e;
+                color: #fff;
+                padding: 10px 15px;
+              }
+            }
+            // screen and (min-width: 1200px) and (max-width: 1399px)
+            // @include MediaQueries(Xlg) {}
+            @include MediaQueries(Desktop) {
+              &::after {
+                content: '🖥️ 1200 1399';
+                position: absolute;
+                top: 0%;
+                left: 0px;
+                border-radius: 0.5rem;
+                z-index: 7;
+                font-size: 20px;
+                font-weight: bold;
+                background-color: #130e0e;
+                color: #fff;
+                padding: 10px 15px;
+                display: none;
+              }
+              width: 50%;
+              overflow-x: hidden;
+            }
+            // screen and (min-width: 1400px)
+            // @include MediaQueries(Xxlg) {}
+            @include MediaQueries(DesktopLg) {
+              &::after {
+                content: '🖥️➕ 1400';
+                position: absolute;
+                top: 0%;
+                left: 0px;
+                border-radius: 0.5rem;
+                z-index: 7;
+                font-size: 20px;
+                font-weight: bold;
+                background-color: #130e0e;
+                color: #fff;
+                padding: 10px 15px;
+                display: none;
+              }
+              width: 50%;
+            }
+            .mobile_content {
+              position: relative;
+              border-radius: 24px;
+              -webkit-border-radius: 24px;
+              -moz-border-radius: 24px;
+              -ms-border-radius: 24px;
+              -o-border-radius: 24px;
+              border: 0.2rem solid #130e0e;
+              height: 100%;
+              background-color: #fff;
+              padding: 1rem;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              form {
+                height: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                .prime_card_form_signup {
+                  border: none;
+                  padding: 0;
+                  margin: 0;
+                  box-shadow: none;
+                  height: 100%;
+                  max-height: 100%;
+                  overflow: hidden;
+                  border-radius: 0px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  div.p-card-header {
+                    height: 20%;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                  }
+                  div.p-card-body {
+                    padding: 0;
+                    margin: 0;
+                    margin-bottom: 1rem;
+                    height: 80%;
+                    display: flex;
+                    flex-direction: column;
+                    div.p-card-content {
+                      height: 80%;
+                      .prime_card_form_signup_content {
+                        > div {
+                          display: flex;
+                          flex-direction: column;
+                          justify-content: space-between;
+                          > div {
+                            margin-top: 1rem;
+                          }
+                        }
+                      }
+                    }
+                    div.p-card-footer {
+                      height: 20%;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                    }
+                  }
+                }
+                .prime_card_form_login {
+                  border: none;
+                  padding: 0;
+                  margin: 0;
+                  box-shadow: none;
+                  height: 100%;
+                  max-height: 100%;
+                  overflow: hidden;
+                  border-radius: 0px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  width: 100%;
+                  div.p-card-header {
+                    height: 20%;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                  }
+                  div.p-card-body {
+                    padding: 0;
+                    margin: 0;
+                    margin-bottom: 1rem;
+                    height: 80%;
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    div.p-card-content {
+                      // height: 80%;
+                      .input_email {
+                        margin-bottom: 1rem;
+                        input {
+                          width: 100%;
+                        }
+                      }
+                      .input_password {
+                        margin-bottom: 1rem;
+                        > div {
+                          width: 100%;
+                          input {
+                            width: 100%;
+                          }
+                        }
+                      }
+                      .Forgotten_password {
+                        margin-bottom: 1rem;
+                      }
+                    }
+                    div.p-card-footer {
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                    }
+                  }
+                }
+              }
+            }
+            .voice_up,
+            .voice_down,
+            .power {
+              content: '';
+              position: absolute;
+              height: 70px;
+              width: 13px;
+              background-color: #130e0e;
+              border-radius: 5px;
+              z-index: 7;
+              //rotate: 90deg;
+              -webkit-border-radius: 5px;
+              -moz-border-radius: 5px;
+              -ms-border-radius: 5px;
+              -o-border-radius: 5px;
+            }
+            .voice_up {
+              top: 10%;
+              left: -13px;
+            }
+            .voice_down {
+              top: 24%;
+              left: -13px;
+            }
+            .power {
+              top: 17%;
+              right: -13px;
+            }
+            .sonser,
+            .voice {
+              position: absolute;
+              z-index: 7;
+            }
+            .sonser {
+              height: 15px;
+              background-color: #130e0e;
+              width: 33.33%;
+              left: 33.33%;
+              border-radius: 0 0 15px 15px;
+            }
+            .voice {
+              height: 5px;
+              background-color: #b3b0b0;
+              width: 15%;
+              left: 42.5%;
+              border-radius: 15px;
+              -webkit-border-radius: 15px;
+              -moz-border-radius: 15px;
+              -ms-border-radius: 15px;
+              -o-border-radius: 15px;
+            }
+            .carme {
+              content: '';
+              position: absolute;
+              height: 7px;
+              width: 7px;
+              top: -1px;
+              left: calc(63% - 15px);
+              background-color: #b3b0b0;
+              border-radius: 50%;
+              -webkit-border-radius: 50%;
+              -moz-border-radius: 50%;
+              -ms-border-radius: 50%;
+              -o-border-radius: 50%;
+              z-index: 10;
+              display: none;
+            }
+          }
+          .mobile_body_dark {
+            border: 0.5rem solid #130e0e;
+            border-radius: 32px;
+            -webkit-border-radius: 32px;
+            -moz-border-radius: 32px;
+            -ms-border-radius: 32px;
+            -o-border-radius: 32px;
+            height: 100%;
+            margin: auto;
+            position: relative;
+            position: relative;
+            // screen and (max-width: 568px)
+            // @include MediaQueries(Xxs) {}
+            @include MediaQueries(Mobile) {
+              &::after {
+                content: '📱 568';
+                position: absolute;
+                top: 0%;
+                left: 0px;
+                border-radius: 0.5rem;
+                z-index: 7;
+                font-size: 20px;
+                font-weight: bold;
+                background-color: #130e0e;
+                color: #fff;
+                padding: 10px 15px;
+              }
+            }
+            // screen and (min-width: 569px) and (max-width: 767px)
+            // @include MediaQueries(Xs) {}
+            @include MediaQueries(Tablet) {
+              &::after {
+                content: '📱 567 767';
+                position: absolute;
+                top: 0%;
+                left: 0px;
+                border-radius: 0.5rem;
+                z-index: 7;
+                font-size: 20px;
+                font-weight: bold;
+                background-color: #130e0e;
+                color: #fff;
+                padding: 10px 15px;
+              }
+            }
+            // screen and (min-width: 768px) and (max-width: 991px)
+            // @include MediaQueries(Md) {}
+            @include MediaQueries(laptop) {
+              &::after {
+                content: '💻 768 991';
+                position: absolute;
+                top: 0%;
+                left: 0px;
+                border-radius: 0.5rem;
+                z-index: 7;
+                font-size: 20px;
+                font-weight: bold;
+                background-color: #130e0e;
+                color: #fff;
+                padding: 10px 15px;
+              }
+            }
+            // screen and (min-width: 992px) and (max-width: 1199px)
+            // @include MediaQueries(Lg) {}
+            @include MediaQueries(laptopLg) {
+              &::after {
+                content: '💻➕ 992 1199';
+                position: absolute;
+                top: 0%;
+                left: 0px;
+                border-radius: 0.5rem;
+                z-index: 7;
+                font-size: 20px;
+                font-weight: bold;
+                background-color: #130e0e;
+                color: #fff;
+                padding: 10px 15px;
+              }
+            }
+            // screen and (min-width: 1200px) and (max-width: 1399px)
+            // @include MediaQueries(Xlg) {}
+            @include MediaQueries(Desktop) {
+              &::after {
+                content: '🖥️ 1200 1399';
+                position: absolute;
+                top: 0%;
+                left: 0px;
+                border-radius: 0.5rem;
+                z-index: 7;
+                font-size: 20px;
+                font-weight: bold;
+                background-color: #130e0e;
+                color: #fff;
+                padding: 10px 15px;
+                display: none;
+              }
+              width: 50%;
+              overflow-x: hidden;
+            }
+            // screen and (min-width: 1400px)
+            // @include MediaQueries(Xxlg) {}
+            @include MediaQueries(DesktopLg) {
+              &::after {
+                content: '🖥️➕ 1400';
+                position: absolute;
+                top: 0%;
+                left: 0px;
+                border-radius: 0.5rem;
+                z-index: 7;
+                font-size: 20px;
+                font-weight: bold;
+                background-color: #130e0e;
+                color: #fff;
+                padding: 10px 15px;
+                display: none;
+              }
+              width: 50%;
+            }
+            .mobile_content {
+              position: relative;
+              border-radius: 24px;
+              -webkit-border-radius: 24px;
+              -moz-border-radius: 24px;
+              -ms-border-radius: 24px;
+              -o-border-radius: 24px;
+              border: 0.2rem solid #130e0e;
+              height: 100%;
+              background-color: #fff;
+              padding: 1rem;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              form {
+                height: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                .prime_card_form_signup {
+                  border: none;
+                  padding: 0;
+                  margin: 0;
+                  box-shadow: none;
+                  height: 100%;
+                  max-height: 100%;
+                  overflow: hidden;
+                  border-radius: 0px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  div.p-card-header {
+                    height: 20%;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                  }
+                  div.p-card-body {
+                    padding: 0;
+                    margin: 0;
+                    margin-bottom: 1rem;
+                    height: 80%;
+                    display: flex;
+                    flex-direction: column;
+                    div.p-card-content {
+                      height: 80%;
+                      .prime_card_form_signup_content {
+                        > div {
+                          display: flex;
+                          flex-direction: column;
+                          justify-content: space-between;
+                          > div {
+                            margin-top: 1rem;
+                          }
+                        }
+                      }
+                    }
+                    div.p-card-footer {
+                      height: 20%;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                    }
+                  }
+                }
+                .prime_card_form_login {
+                  border: none;
+                  padding: 0;
+                  margin: 0;
+                  box-shadow: none;
+                  height: 100%;
+                  max-height: 100%;
+                  overflow: hidden;
+                  border-radius: 0px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  width: 100%;
+                  div.p-card-header {
+                    height: 20%;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                  }
+                  div.p-card-body {
+                    padding: 0;
+                    margin: 0;
+                    margin-bottom: 1rem;
+                    height: 80%;
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    div.p-card-content {
+                      // height: 80%;
+                      .input_email {
+                        margin-bottom: 1rem;
+                        input {
+                          width: 100%;
+                        }
+                      }
+                      .input_password {
+                        margin-bottom: 1rem;
+                        > div {
+                          width: 100%;
+                          input {
+                            width: 100%;
+                          }
+                        }
+                      }
+                      .Forgotten_password {
+                        margin-bottom: 1rem;
+                      }
+                    }
+                    div.p-card-footer {
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                    }
+                  }
+                }
+              }
+            }
+            .voice_up,
+            .voice_down,
+            .power {
+              content: '';
+              position: absolute;
+              height: 70px;
+              width: 13px;
+              background-color: #130e0e;
+              border-radius: 5px;
+              z-index: 7;
+              //rotate: 90deg;
+              -webkit-border-radius: 5px;
+              -moz-border-radius: 5px;
+              -ms-border-radius: 5px;
+              -o-border-radius: 5px;
+            }
+            .voice_up {
+              top: 10%;
+              left: -13px;
+            }
+            .voice_down {
+              top: 24%;
+              left: -13px;
+            }
+            .power {
+              top: 17%;
+              right: -13px;
+            }
+            .sonser,
+            .voice {
+              position: absolute;
+              z-index: 7;
+            }
+            .sonser {
+              height: 15px;
+              background-color: #130e0e;
+              width: 33.33%;
+              left: 33.33%;
+              border-radius: 0 0 15px 15px;
+            }
+            .voice {
+              height: 5px;
+              background-color: #b3b0b0;
+              width: 15%;
+              left: 42.5%;
+              border-radius: 15px;
+              -webkit-border-radius: 15px;
+              -moz-border-radius: 15px;
+              -ms-border-radius: 15px;
+              -o-border-radius: 15px;
+            }
+            .carme {
+              content: '';
+              position: absolute;
+              height: 7px;
+              width: 7px;
+              top: -1px;
+              left: calc(63% - 15px);
+              background-color: #b3b0b0;
+              border-radius: 50%;
+              -webkit-border-radius: 50%;
+              -moz-border-radius: 50%;
+              -ms-border-radius: 50%;
+              -o-border-radius: 50%;
+              z-index: 10;
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

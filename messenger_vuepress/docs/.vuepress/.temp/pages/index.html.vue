@@ -1425,11 +1425,222 @@
 <span class="line"></span>
 <span class="line"><span class="token keyword">export</span> <span class="token keyword">default</span> Noir<span class="token punctuation">;</span></span>
 <span class="line"></span></code></pre>
-<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h6 id="_3️⃣-scss" tabindex="-1"><a class="header-anchor" href="#_3️⃣-scss"><span>- 3️⃣ scss</span></a></h6>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h6 id="import-inside-main-js" tabindex="-1"><a class="header-anchor" href="#import-inside-main-js"><span>Import Inside main.js</span></a></h6>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js" data-title="js"><pre v-pre><code><span class="line"><span class="token comment">// --------------- PrimeVue Core Configuration ---------------</span></span>
+<span class="line"><span class="token comment">// Import PrimeVue library configuration</span></span>
+<span class="line"><span class="token comment">// استيراد مكتبة PrimeVue وإعداداتها الأساسية</span></span>
+<span class="line"><span class="token keyword">import</span> PrimeVue <span class="token keyword">from</span> <span class="token string">"primevue/config"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- Popup Services (For Dialogs and Confirmations) ---------------</span></span>
+<span class="line"><span class="token comment">// Import services for confirmation and dialog popups</span></span>
+<span class="line"><span class="token comment">// خدمات النوافذ المنبثقة لتأكيد العمليات وفتح الحوارات</span></span>
+<span class="line"><span class="token keyword">import</span> ConfirmationService <span class="token keyword">from</span> <span class="token string">"primevue/confirmationservice"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> DialogService <span class="token keyword">from</span> <span class="token string">"primevue/dialogservice"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// Buttons</span></span>
+<span class="line"><span class="token comment">// الأزرار وزر التبديل</span></span>
+<span class="line"><span class="token keyword">import</span> Button <span class="token keyword">from</span> <span class="token string">"primevue/button"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> ToggleButton <span class="token keyword">from</span> <span class="token string">"primevue/togglebutton"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- Form Components ---------------</span></span>
+<span class="line"><span class="token comment">// Import components for creating forms</span></span>
+<span class="line"><span class="token comment">// عناصر النماذج</span></span>
+<span class="line"><span class="token keyword">import</span> Fluid <span class="token keyword">from</span> <span class="token string">"primevue/fluid"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> InputText <span class="token keyword">from</span> <span class="token string">"primevue/inputtext"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> Textarea <span class="token keyword">from</span> <span class="token string">"primevue/textarea"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> Password <span class="token keyword">from</span> <span class="token string">"primevue/password"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> FloatLabel <span class="token keyword">from</span> <span class="token string">"primevue/floatlabel"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> Checkbox <span class="token keyword">from</span> <span class="token string">"primevue/checkbox"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> RadioButton <span class="token keyword">from</span> <span class="token string">"primevue/radiobutton"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> Listbox <span class="token keyword">from</span> <span class="token string">"primevue/listbox"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> DatePicker <span class="token keyword">from</span> <span class="token string">"primevue/datepicker"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> InputGroup <span class="token keyword">from</span> <span class="token string">"primevue/inputgroup"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> InputGroupAddon <span class="token keyword">from</span> <span class="token string">"primevue/inputgroupaddon"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> ColorPicker <span class="token keyword">from</span> <span class="token string">"primevue/colorpicker"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- File Components ---------------</span></span>
+<span class="line"><span class="token comment">// Import file upload</span></span>
+<span class="line"><span class="token comment">// تحميل الملفات</span></span>
+<span class="line"><span class="token keyword">import</span> FileUpload <span class="token keyword">from</span> <span class="token string">"primevue/fileupload"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- Menu Components ---------------</span></span>
+<span class="line"><span class="token comment">// Import components for building menus</span></span>
+<span class="line"><span class="token comment">// عناصر القائمة</span></span>
+<span class="line"><span class="token keyword">import</span> Menubar <span class="token keyword">from</span> <span class="token string">"primevue/menubar"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> TieredMenu <span class="token keyword">from</span> <span class="token string">"primevue/tieredmenu"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- Image Components ---------------</span></span>
+<span class="line"><span class="token comment">// Import components for handling images and avatars</span></span>
+<span class="line"><span class="token comment">// مكونات الصور والأفاتار</span></span>
+<span class="line"><span class="token keyword">import</span> Image <span class="token keyword">from</span> <span class="token string">"primevue/image"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> Avatar <span class="token keyword">from</span> <span class="token string">"primevue/avatar"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> AvatarGroup <span class="token keyword">from</span> <span class="token string">"primevue/avatargroup"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- Popup Components ---------------</span></span>
+<span class="line"><span class="token comment">// Import popover, dialog, and drawer components for popups</span></span>
+<span class="line"><span class="token comment">// مكونات النوافذ المنبثقة</span></span>
+<span class="line"><span class="token keyword">import</span> Popover <span class="token keyword">from</span> <span class="token string">"primevue/popover"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> Dialog <span class="token keyword">from</span> <span class="token string">"primevue/dialog"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> Drawer <span class="token keyword">from</span> <span class="token string">"primevue/drawer"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- Panel Components ---------------</span></span>
+<span class="line"><span class="token comment">// Import panel-related components for layout and navigation</span></span>
+<span class="line"><span class="token comment">// مكونات اللوحات لعرض المعلومات المنظمة</span></span>
+<span class="line"><span class="token keyword">import</span> Fieldset <span class="token keyword">from</span> <span class="token string">"primevue/fieldset"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> Stepper <span class="token keyword">from</span> <span class="token string">"primevue/stepper"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> StepList <span class="token keyword">from</span> <span class="token string">"primevue/steplist"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> StepPanels <span class="token keyword">from</span> <span class="token string">"primevue/steppanels"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> StepItem <span class="token keyword">from</span> <span class="token string">"primevue/stepitem"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> Step <span class="token keyword">from</span> <span class="token string">"primevue/step"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> StepPanel <span class="token keyword">from</span> <span class="token string">"primevue/steppanel"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- Card Components ---------------</span></span>
+<span class="line"><span class="token comment">// Import card component for displaying content in card format</span></span>
+<span class="line"><span class="token comment">// مكون البطاقات لعرض المحتوى بطريقة منسقة</span></span>
+<span class="line"><span class="token keyword">import</span> Card <span class="token keyword">from</span> <span class="token string">"primevue/card"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- Theme Components ---------------</span></span>
+<span class="line"><span class="token comment">// Import theme presets and theme switcher component</span></span>
+<span class="line"><span class="token comment">// مكونات اللوحات لعرض المعلومات المنظمة</span></span>
+<span class="line"><span class="token keyword">import</span> Noir <span class="token keyword">from</span> <span class="token string">"./presets/Noir.js"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> ThemeSwitcher <span class="token keyword">from</span> <span class="token string">"./components/Theme/ThemeSwitcher.vue"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- Notification Components ---------------</span></span>
+<span class="line"><span class="token comment">// Import toast and message components for notifications</span></span>
+<span class="line"><span class="token keyword">import</span> Toast <span class="token keyword">from</span> <span class="token string">"primevue/toast"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> ToastService <span class="token keyword">from</span> <span class="token string">"primevue/toastservice"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> Message <span class="token keyword">from</span> <span class="token string">"primevue/message"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- Icon Components ---------------</span></span>
+<span class="line"><span class="token comment">// Import icon components for enhanced UI elements</span></span>
+<span class="line"><span class="token keyword">import</span> IconField <span class="token keyword">from</span> <span class="token string">"primevue/iconfield"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> InputIcon <span class="token keyword">from</span> <span class="token string">"primevue/inputicon"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- Editor Components ---------------</span></span>
+<span class="line"><span class="token comment">// Import rich text editor component (Quill-based)</span></span>
+<span class="line"><span class="token keyword">import</span> Editor <span class="token keyword">from</span> <span class="token string">"primevue/editor"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- Table Components ---------------</span></span>
+<span class="line"><span class="token comment">// Import table components for data presentation</span></span>
+<span class="line"><span class="token comment">// Quill محرر النصوص الغنية المستندة إلى</span></span>
+<span class="line"><span class="token keyword">import</span> DataTable <span class="token keyword">from</span> <span class="token string">"primevue/datatable"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> Column <span class="token keyword">from</span> <span class="token string">"primevue/column"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> ColumnGroup <span class="token keyword">from</span> <span class="token string">"primevue/columngroup"</span><span class="token punctuation">;</span> <span class="token comment">// optional</span></span>
+<span class="line"><span class="token keyword">import</span> Row <span class="token keyword">from</span> <span class="token string">"primevue/row"</span><span class="token punctuation">;</span> <span class="token comment">// optional</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- Placeholder Components ---------------</span></span>
+<span class="line"><span class="token comment">// Import skeleton component for loading placeholders</span></span>
+<span class="line"><span class="token keyword">import</span> Skeleton <span class="token keyword">from</span> <span class="token string">"primevue/skeleton"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- Placeholder Components ---------------</span></span>
+<span class="line"><span class="token comment">// Badge is a small status indicator for another element.</span></span>
+<span class="line"><span class="token keyword">import</span> Badge <span class="token keyword">from</span> <span class="token string">"primevue/badge"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> OverlayBadge <span class="token keyword">from</span> <span class="token string">"primevue/overlaybadge"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- Styles ---------------</span></span>
+<span class="line"><span class="token comment">// Import necessary styles for PrimeVue and Tailwind CSS</span></span>
+<span class="line"><span class="token keyword">import</span> <span class="token string">"primeicons/primeicons.css"</span><span class="token punctuation">;</span></span>
+<span class="line"><span class="token keyword">import</span> <span class="token string">"tailwindcss/tailwind.css"</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- Initialize PrimeVue ---------------</span></span>
+<span class="line"><span class="token comment">// Configure and initialize PrimeVue with theme settings</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>PrimeVue<span class="token punctuation">,</span> <span class="token punctuation">{</span></span>
+<span class="line">  <span class="token literal-property property">theme</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token literal-property property">preset</span><span class="token operator">:</span> Noir<span class="token punctuation">,</span></span>
+<span class="line">    <span class="token literal-property property">options</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="line">      <span class="token literal-property property">prefix</span><span class="token operator">:</span> <span class="token string">"p"</span><span class="token punctuation">,</span></span>
+<span class="line">      <span class="token literal-property property">darkModeSelector</span><span class="token operator">:</span> <span class="token string">".p-dark"</span><span class="token punctuation">,</span></span>
+<span class="line">      <span class="token literal-property property">cssLayer</span><span class="token operator">:</span> <span class="token boolean">false</span></span>
+<span class="line">    <span class="token punctuation">}</span></span>
+<span class="line">  <span class="token punctuation">}</span></span>
+<span class="line"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// Initialize and add services</span></span>
+<span class="line"><span class="token comment">// تهيئة وإضافة الخدمات</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>ConfirmationService<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>DialogService<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>ToastService<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// --------------- Register Components ---------------</span></span>
+<span class="line"><span class="token comment">// Register components in the application for global usage</span></span>
+<span class="line"><span class="token comment">// Prime Button</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_button"</span><span class="token punctuation">,</span> Button<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// Theme Switcher Component</span></span>
+<span class="line"><span class="token comment">// مكون تبديل السمة</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"ThemeSwitcher"</span><span class="token punctuation">,</span> ThemeSwitcher<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// Form Components</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_fluid"</span><span class="token punctuation">,</span> Fluid<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_input_text"</span><span class="token punctuation">,</span> InputText<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_textarea"</span><span class="token punctuation">,</span> Textarea<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_input_password"</span><span class="token punctuation">,</span> Password<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_float_label"</span><span class="token punctuation">,</span> FloatLabel<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_check_box"</span><span class="token punctuation">,</span> Checkbox<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_radio_button"</span><span class="token punctuation">,</span> RadioButton<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_list_box"</span><span class="token punctuation">,</span> Listbox<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_date_picker"</span><span class="token punctuation">,</span> DatePicker<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_input_group"</span><span class="token punctuation">,</span> InputGroup<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_input_group_addon"</span><span class="token punctuation">,</span> InputGroupAddon<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_file_upload"</span><span class="token punctuation">,</span> FileUpload<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_toggle_button"</span><span class="token punctuation">,</span> ToggleButton<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_color_picker"</span><span class="token punctuation">,</span> ColorPicker<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// Menu Components</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_menubar"</span><span class="token punctuation">,</span> Menubar<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_tiered_menu"</span><span class="token punctuation">,</span> TieredMenu<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// Image Components</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_image"</span><span class="token punctuation">,</span> Image<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_avatar"</span><span class="token punctuation">,</span> Avatar<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_avatar_group"</span><span class="token punctuation">,</span> AvatarGroup<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// Card Components</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_card"</span><span class="token punctuation">,</span> Card<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// Popup Components</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_popover"</span><span class="token punctuation">,</span> Popover<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_dialog"</span><span class="token punctuation">,</span> Dialog<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_drawer"</span><span class="token punctuation">,</span> Drawer<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// Panel Components</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_fieldset"</span><span class="token punctuation">,</span> Fieldset<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_stepper"</span><span class="token punctuation">,</span> Stepper<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_steplist"</span><span class="token punctuation">,</span> StepList<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_steppanels"</span><span class="token punctuation">,</span> StepPanels<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_stepitem"</span><span class="token punctuation">,</span> StepItem<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_step"</span><span class="token punctuation">,</span> Step<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_steppanel"</span><span class="token punctuation">,</span> StepPanel<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// Notification Components</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_toast"</span><span class="token punctuation">,</span> Toast<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_message"</span><span class="token punctuation">,</span> Message<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// Icon Components</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_icon_field"</span><span class="token punctuation">,</span> IconField<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_input_icon"</span><span class="token punctuation">,</span> InputIcon<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// Editor Component</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_editor"</span><span class="token punctuation">,</span> Editor<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// Table Components</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_data_table"</span><span class="token punctuation">,</span> DataTable<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_column"</span><span class="token punctuation">,</span> Column<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_column_group"</span><span class="token punctuation">,</span> ColumnGroup<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_row"</span><span class="token punctuation">,</span> Row<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// Placeholder Components</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_skeleton"</span><span class="token punctuation">,</span> Skeleton<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment">// Badge is a small status indicator for another element.</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_badge"</span><span class="token punctuation">,</span> Badge<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">app<span class="token punctuation">.</span><span class="token function">component</span><span class="token punctuation">(</span><span class="token string">"prime_overlay_badge"</span><span class="token punctuation">,</span> OverlayBadge<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h6 id="_3️⃣-scss" tabindex="-1"><a class="header-anchor" href="#_3️⃣-scss"><span>- 3️⃣ scss</span></a></h6>
 <h6 id="📂-create-folder-scss-inside-assets-and-file-style-scss" tabindex="-1"><a class="header-anchor" href="#📂-create-folder-scss-inside-assets-and-file-style-scss"><span>📂 Create Folder [scss] Inside assets And File [style.scss]</span></a></h6>
 <div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre v-pre><code><span class="line">scss/style.scss</span>
 <span class="line"></span></code></pre>
-<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h6 id="import-inside-main-js" tabindex="-1"><a class="header-anchor" href="#import-inside-main-js"><span>Import Inside main.js</span></a></h6>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h6 id="import-inside-main-js-1" tabindex="-1"><a class="header-anchor" href="#import-inside-main-js-1"><span>Import Inside main.js</span></a></h6>
 <div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js" data-title="js"><pre v-pre><code><span class="line"><span class="token comment">// My Style</span></span>
 <span class="line"><span class="token keyword">import</span> <span class="token string">"./assets/scss/style.scss"</span><span class="token punctuation">;</span></span>
 <span class="line"></span></code></pre>
@@ -1796,7 +2007,197 @@
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">npm run dev</span>
 <span class="line"></span></code></pre>
 <div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h3 id="📝-page-page-not-found" tabindex="-1"><a class="header-anchor" href="#📝-page-page-not-found"><span>📝 Page Page Not Found</span></a></h3>
-<h6 id="📝-page-page-not-found-1" tabindex="-1"><a class="header-anchor" href="#📝-page-page-not-found-1"><span>📝 Page Page Not Found</span></a></h6>
+<h6 id="📝-create-page-pagenotfound-vue-inside-components" tabindex="-1"><a class="header-anchor" href="#📝-create-page-pagenotfound-vue-inside-components"><span>📝 Create Page [PageNotFound.vue ] Inside Components</span></a></h6>
+<div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre v-pre><code><span class="line">PageNotFound/PageNotFound.vue</span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><div class="language-html line-numbers-mode" data-highlighter="prismjs" data-ext="html" data-title="html"><pre v-pre><code><span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span></span>
+<span class="line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>PageNotFound<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+<span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>w-full<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></span>
+<span class="line">      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span></span>
+<span class="line">        <span class="token attr-name">:src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>imageSrc<span class="token punctuation">"</span></span></span>
+<span class="line">        <span class="token attr-name">@error</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>loadFallbackImage<span class="token punctuation">"</span></span></span>
+<span class="line">        <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Page Not Found<span class="token punctuation">"</span></span></span>
+<span class="line">        <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>img-fluid h-screen w-full<span class="token punctuation">"</span></span></span>
+<span class="line">      <span class="token punctuation">/></span></span></span>
+<span class="line">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
+<span class="line">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></span>
+<span class="line"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js" data-title="js"><pre v-pre><code><span class="line"><span class="token operator">&lt;</span>script<span class="token operator">></span></span>
+<span class="line">  <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'PageNotFound'</span><span class="token punctuation">,</span></span>
+<span class="line">    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">      <span class="token keyword">return</span> <span class="token punctuation">{</span></span>
+<span class="line">        <span class="token comment">// الرابط الأساسي للصورة من الإنترنت</span></span>
+<span class="line">        <span class="token literal-property property">imageSrc</span><span class="token operator">:</span></span>
+<span class="line">          <span class="token string">'https://raw.githubusercontent.com/LearnCodingEasy/Images/refs/heads/main/images/Page_Not_Found/404.jpg'</span><span class="token punctuation">,</span></span>
+<span class="line">      <span class="token punctuation">}</span></span>
+<span class="line">    <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
+<span class="line">    <span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">{</span></span>
+<span class="line">      <span class="token function">loadFallbackImage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">        <span class="token comment">// في حالة الخطأ، تغيير الصورة إلى المسار المحلي</span></span>
+<span class="line">        <span class="token comment">// eslint-disable-next-line no-undef</span></span>
+<span class="line">        <span class="token keyword">this</span><span class="token punctuation">.</span>imageSrc <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'../../Images/Page_Not_Found/404.jpg'</span><span class="token punctuation">)</span></span>
+<span class="line">        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Bad</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span></span>
+<span class="line">      <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
+<span class="line">    <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
+<span class="line">    <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span></span>
+<span class="line">      document<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token string">'Trello | Page Not Found'</span></span>
+<span class="line">    <span class="token punctuation">}</span><span class="token punctuation">,</span></span>
+<span class="line">  <span class="token punctuation">}</span></span>
+<span class="line">  <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span></span>
+<span class="line"></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-css line-numbers-mode" data-highlighter="prismjs" data-ext="css" data-title="css"><pre v-pre><code><span class="line"><span class="token selector">&lt;style lang="scss"></span>
+<span class="line">  .PageNotFound</span> <span class="token punctuation">{</span></span>
+<span class="line">    <span class="token selector">> div</span> <span class="token punctuation">{</span></span>
+<span class="line">      <span class="token property">height</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span>100vh - 70px<span class="token punctuation">)</span><span class="token punctuation">;</span></span>
+<span class="line">    <span class="token punctuation">}</span></span>
+<span class="line">  <span class="token punctuation">}</span></span>
+<span class="line">&lt;/style></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="📝-page-app" tabindex="-1"><a class="header-anchor" href="#📝-page-app"><span>📝 Page App</span></a></h3>
+<h6 id="📝-edit-page-app-vue" tabindex="-1"><a class="header-anchor" href="#📝-edit-page-app-vue"><span>📝 Edit Page [ App.vue ]</span></a></h6>
+<div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js" data-title="js"><pre v-pre><code><span class="line"></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><div class="language-html line-numbers-mode" data-highlighter="prismjs" data-ext="html" data-title="html"><pre v-pre><code><span class="line"></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h3 id="📝-page-login" tabindex="-1"><a class="header-anchor" href="#📝-page-login"><span>📝 Page Login</span></a></h3>
+<h6 id="📝-create-page-loginview-vue-inside-authentication" tabindex="-1"><a class="header-anchor" href="#📝-create-page-loginview-vue-inside-authentication"><span>📝 Create Page [ LoginView.vue ] Inside [ Authentication ]</span></a></h6>
+<div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre v-pre><code><span class="line">Authentication/LoginView.vue</span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><div class="language-javascript line-numbers-mode" data-highlighter="prismjs" data-ext="js" data-title="js"><pre v-pre><code><span class="line"></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><div class="language-html line-numbers-mode" data-highlighter="prismjs" data-ext="html" data-title="html"><pre v-pre><code><span class="line"></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h3 id="📝-page-profile" tabindex="-1"><a class="header-anchor" href="#📝-page-profile"><span>📝 Page Profile</span></a></h3>
+<h6 id="📝-create-page-profileview-vue-inside-account" tabindex="-1"><a class="header-anchor" href="#📝-create-page-profileview-vue-inside-account"><span>📝 Create Page [ ProfileView.vue ] Inside [ Account ]</span></a></h6>
+<div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre v-pre><code><span class="line">Account/ProfileView.vue</span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h3 id="📝-page-page-not-found-1" tabindex="-1"><a class="header-anchor" href="#📝-page-page-not-found-1"><span>📝 Page Page Not Found</span></a></h3>
+<h6 id="📝-page-page-not-found-2" tabindex="-1"><a class="header-anchor" href="#📝-page-page-not-found-2"><span>📝 Page Page Not Found</span></a></h6>
+<div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre v-pre><code><span class="line"></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<h2 id="💬-chat" tabindex="-1"><a class="header-anchor" href="#💬-chat"><span>💬 Chat</span></a></h2>
+<h3 id="💬-django-chat" tabindex="-1"><a class="header-anchor" href="#💬-django-chat"><span>💬 Django Chat</span></a></h3>
+<div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">python manage.py startapp chat</span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<h3 id="💬-vue-chat" tabindex="-1"><a class="header-anchor" href="#💬-vue-chat"><span>💬 Vue Chat</span></a></h3>
 </div></template>
 
 

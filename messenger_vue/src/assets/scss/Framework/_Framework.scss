@@ -1,0 +1,36 @@
+@import 'Media_Queries';
+// @use 'Media_Queries' as *;
+// @use 'Mixin/Mixin' as *;
+
+.inner_content_page_login {
+  // screen and (max-width: 568px)
+  // @include MediaQueries(Xxs) {}
+  @include MediaQueries(Mobile) {
+    // background-color: rgb(255, 167, 4);
+  }
+  // screen and (min-width: 569px) and (max-width: 767px)
+  // @include MediaQueries(Xs) {}
+  @include MediaQueries(Tablet) {
+    background-color: #b3f5b3;
+  }
+  // screen and (min-width: 768px) and (max-width: 991px)
+  // @include MediaQueries(Md) {}
+  @include MediaQueries(laptop) {
+    // background-color: #b3d4f5;
+  }
+  // screen and (min-width: 992px) and (max-width: 1199px)
+  // @include MediaQueries(Lg) {  }
+  @include MediaQueries(laptopLg) {
+    // background-color: #f5b5b3;
+  }
+  // screen and (min-width: 1200px) and (max-width: 1399px)
+  // @include MediaQueries(Xlg) {}
+  @include MediaQueries(Desktop) {
+    // background-color: #b3f5ee;
+  }
+  // screen and (min-width: 1400px)
+  // @include MediaQueries(Xxlg) {}
+  @include MediaQueries(DesktopLg) {
+    // background-color: #123593;
+  }
+}

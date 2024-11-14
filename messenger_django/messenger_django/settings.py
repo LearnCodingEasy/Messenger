@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Apps
     "account",
+    "chat",
     # Libraries
     "rest_framework",
     "rest_framework_simplejwt",
