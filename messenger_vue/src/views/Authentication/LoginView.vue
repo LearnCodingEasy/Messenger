@@ -415,7 +415,8 @@ export default {
     },
   },
   mounted() {
-    document.title = 'Trello | Login'
+    // 📝 عنوان الصفحة
+    document.title = 'Message | Login'
   },
 }
 </script>

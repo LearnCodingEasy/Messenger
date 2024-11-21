@@ -43,7 +43,10 @@ let logout = () => {
 </script>
 
 <template>
-  <div class="wrapper_page_app">
+  <div
+    class="wrapper_page_app"
+    style="border: 1rem solid #000; height: 100vh; overflow-y: scroll; padding: 0.5rem"
+  >
     <!-- Header Tailwind -->
     <div class="header_wrapper sticky top-0 left-0 right-0">
       <div class="container mx-auto">
@@ -113,31 +116,32 @@ let logout = () => {
                       >
                         <div class="header_logo_link flex flex-shrink-0 items-center">
                           <!-- Logo -->
-                          <RouterLink to="/" class="logo flex">
+                          <RouterLink to="/" class="logo flex items-center">
                             <img
                               class="h-10 w-auto"
-                              src="../src/assets/Images/Trello-logo.png"
+                              src="./assets/Images/Messenger_80x80.png"
                               alt="Your Company"
                             />
+                            <span class="px-2 font-bold"> Messenger </span>
                           </RouterLink>
                         </div>
                         <div class="header_main_links hidden sm:ml-6 sm:block">
                           <div class="header_main_link flex space-x-4">
                             <RouterLink
-                              to="/Workspace"
+                              to="/Desktop"
                               class="rounded-md px-3 py-2 text-md"
                               aria-current="page"
                             >
-                              workspace</RouterLink
+                              Desktop</RouterLink
                             >
                             <RouterLink to="/" class="rounded-md px-3 py-2 text-md"
-                              >Recent
+                              >Laptop
                             </RouterLink>
                             <RouterLink to="/" class="rounded-md px-3 py-2 text-md"
-                              >Starred
+                              >Tablet
                             </RouterLink>
                             <RouterLink to="/" class="rounded-md px-3 py-2 text-md"
-                              >More
+                              >Mobile
                             </RouterLink>
                             <prime_button
                               icon="pi pi-plus"

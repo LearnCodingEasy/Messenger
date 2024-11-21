@@ -1,14 +1,14 @@
 <script setup></script>
 
 <template>
-  <main>
+  <main class="" style="position: sticky; top: 0; left: 0">
     <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
       <div class="main-left col-span-1">
         <div class="p-4 bg-white border border-gray-200 rounded-lg">
           <div class="space-y-4">
-            <div v-if="conversations.length">
+            <div v-if="conversations.length" class="if_user_have_conversations">
               <div
-                class="flex items-center justify-between my-2"
+                class="flex items-center justify-between my-2 wrapper_control_conversation"
                 v-for="conversation in conversations"
                 v-bind:key="conversation.id"
                 v-on:click="setActiveConversation(conversation.id)"
@@ -46,7 +46,7 @@
         </div>
       </div>
 
-      <div class="main-center col-span-3 space-y-4">
+      <div class="main-center col-span-3 space-y-4 h-dvh overflow-hidden">
         <div class="bg-white border border-gray-200 rounded-lg">
           <div class="flex flex-col flex-grow p-4">
             <template v-for="message in activeConversation.messages" :key="message.id">
@@ -134,6 +134,9 @@ export default {
   mounted() {
     this.getConversations()
     this.getFriends()
+
+    // 📝 عنوان الصفحة
+    document.title = 'Message | Home'
   },
 
   methods: {
@@ -230,3 +233,8 @@ export default {
   },
 }
 </script>
+
+<!--
+
+
+-->

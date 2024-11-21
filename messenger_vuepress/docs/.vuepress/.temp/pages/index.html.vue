@@ -2140,7 +2140,562 @@
 <h3 id="💬-django-chat" tabindex="-1"><a class="header-anchor" href="#💬-django-chat"><span>💬 Django Chat</span></a></h3>
 <div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">python manage.py startapp chat</span>
 <span class="line"></span></code></pre>
-<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><hr>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h3 id="⚙️-settings-1" tabindex="-1"><a class="header-anchor" href="#⚙️-settings-1"><span>⚙️ Settings</span></a></h3>
+<h4 id="⚙️-page-settings-settings-py-📝-1" tabindex="-1"><a class="header-anchor" href="#⚙️-page-settings-settings-py-📝-1"><span>⚙️ Page Settings [ settings.py ] 📝</span></a></h4>
+<div class="language-python line-numbers-mode" data-highlighter="prismjs" data-ext="py" data-title="py"><pre v-pre><code><span class="line">INSTALLED_APPS <span class="token operator">=</span> <span class="token punctuation">[</span></span>
+<span class="line">    <span class="token comment"># ...</span></span>
+<span class="line">    <span class="token comment"># Apps</span></span>
+<span class="line">    <span class="token string">"chat"</span><span class="token punctuation">,</span></span>
+<span class="line">    <span class="token comment"># Libraries</span></span>
+<span class="line">    <span class="token comment"># ...</span></span>
+<span class="line"><span class="token punctuation">]</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="⚙️-chat-page-models-py" tabindex="-1"><a class="header-anchor" href="#⚙️-chat-page-models-py"><span>⚙️ Chat Page [ models.py ]</span></a></h3>
+<h4 id="💌-app-chat-page-models-py-📝" tabindex="-1"><a class="header-anchor" href="#💌-app-chat-page-models-py-📝"><span>💌 App [ Chat ] Page [ models.py ] 📝</span></a></h4>
+<div class="language-python line-numbers-mode" data-highlighter="prismjs" data-ext="py" data-title="py"><pre v-pre><code><span class="line"><span class="token comment"># استيراد uuid لإنشاء معرّفات فريدة</span></span>
+<span class="line"><span class="token comment"># Import uuid to generate unique identifiers</span></span>
+<span class="line"><span class="token keyword">import</span> uuid</span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># استيراد النماذج من Django</span></span>
+<span class="line"><span class="token comment"># Import models from Django</span></span>
+<span class="line"><span class="token keyword">from</span> django<span class="token punctuation">.</span>db <span class="token keyword">import</span> models</span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># استيراد الدالة timesince لتنسيق الوقت</span></span>
+<span class="line"><span class="token comment"># Import the timesince function to format time</span></span>
+<span class="line"><span class="token keyword">from</span> django<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>timesince <span class="token keyword">import</span> timesince</span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># استيراد نموذج المستخدم</span></span>
+<span class="line"><span class="token comment"># Import the User model</span></span>
+<span class="line"><span class="token keyword">from</span> account<span class="token punctuation">.</span>models <span class="token keyword">import</span> User</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># نموذج المحادثة</span></span>
+<span class="line"><span class="token comment"># Conversation model</span></span>
+<span class="line"><span class="token keyword">class</span> <span class="token class-name">Conversation</span><span class="token punctuation">(</span>models<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="line">    <span class="token comment"># معرف فريد للمحادثة</span></span>
+<span class="line">    <span class="token comment"># Unique identifier for the conversation</span></span>
+<span class="line">    <span class="token builtin">id</span> <span class="token operator">=</span> models<span class="token punctuation">.</span>UUIDField<span class="token punctuation">(</span>primary_key<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> default<span class="token operator">=</span>uuid<span class="token punctuation">.</span>uuid4<span class="token punctuation">,</span> editable<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># علاقة ManyToMany مع المستخدمين</span></span>
+<span class="line">    <span class="token comment"># Many-to-many relationship with users</span></span>
+<span class="line">    <span class="token comment"># هذه العلاقة تسمح بوجود العديد من المستخدمين في نفس المحادثة</span></span>
+<span class="line">    <span class="token comment"># This relationship allows multiple users to be part of the same conversation</span></span>
+<span class="line">    users <span class="token operator">=</span> models<span class="token punctuation">.</span>ManyToManyField<span class="token punctuation">(</span>User<span class="token punctuation">,</span> related_name<span class="token operator">=</span><span class="token string">"conversations"</span><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># تاريخ ووقت إنشاء المحادثة</span></span>
+<span class="line">    <span class="token comment"># Date and time when the conversation was created</span></span>
+<span class="line">    <span class="token comment"># يتم تحديد تاريخ ووقت الإنشاء تلقائيًا عند إضافة المحادثة</span></span>
+<span class="line">    <span class="token comment"># The created_at field is set automatically when the conversation is created</span></span>
+<span class="line">    created_at <span class="token operator">=</span> models<span class="token punctuation">.</span>DateTimeField<span class="token punctuation">(</span>auto_now_add<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># تاريخ ووقت آخر تعديل للمحادثة</span></span>
+<span class="line">    <span class="token comment"># Date and time of the last modification of the conversation</span></span>
+<span class="line">    <span class="token comment"># يتم تحديث هذا الحقل تلقائيًا عند أي تعديل على المحادثة</span></span>
+<span class="line">    <span class="token comment"># This field gets updated automatically on any modification of the conversation</span></span>
+<span class="line">    modified_at <span class="token operator">=</span> models<span class="token punctuation">.</span>DateTimeField<span class="token punctuation">(</span>auto_now<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># دالة لإرجاع الوقت المنقضي منذ إنشاء المحادثة بتنسيق قابل للقراءة البشرية</span></span>
+<span class="line">    <span class="token comment"># Method to return the time elapsed since the conversation was created in a human-readable format</span></span>
+<span class="line">    <span class="token comment"># تستخدم هذه الدالة دالة timesince لعرض الفرق بين تاريخ الإنشاء والوقت الحالي</span></span>
+<span class="line">    <span class="token comment"># This method uses the timesince function to display the difference between creation time and current time</span></span>
+<span class="line">    <span class="token keyword">def</span> <span class="token function">modified_at_formatted</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="line">        <span class="token keyword">return</span> timesince<span class="token punctuation">(</span>self<span class="token punctuation">.</span>created_at<span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># نموذج الرسالة في المحادثة</span></span>
+<span class="line"><span class="token comment"># Conversation message model</span></span>
+<span class="line"><span class="token keyword">class</span> <span class="token class-name">ConversationMessage</span><span class="token punctuation">(</span>models<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="line">    <span class="token comment"># معرف فريد للرسالة</span></span>
+<span class="line">    <span class="token comment"># Unique identifier for the message</span></span>
+<span class="line">    <span class="token comment"># يتم تعيين معرف فريد لكل رسالة باستخدام UUID</span></span>
+<span class="line">    <span class="token comment"># Each message is assigned a unique identifier using UUID</span></span>
+<span class="line">    <span class="token builtin">id</span> <span class="token operator">=</span> models<span class="token punctuation">.</span>UUIDField<span class="token punctuation">(</span>primary_key<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> default<span class="token operator">=</span>uuid<span class="token punctuation">.</span>uuid4<span class="token punctuation">,</span> editable<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># علاقة ForeignKey مع المحادثة التي تنتمي إليها الرسالة</span></span>
+<span class="line">    <span class="token comment"># ForeignKey relationship to the conversation that the message belongs to</span></span>
+<span class="line">    <span class="token comment"># هذه العلاقة تشير إلى المحادثة التي تنتمي إليها الرسالة</span></span>
+<span class="line">    <span class="token comment"># This relationship points to the conversation that the message belongs to</span></span>
+<span class="line">    conversation <span class="token operator">=</span> models<span class="token punctuation">.</span>ForeignKey<span class="token punctuation">(</span></span>
+<span class="line">        Conversation<span class="token punctuation">,</span> related_name<span class="token operator">=</span><span class="token string">"messages"</span><span class="token punctuation">,</span> on_delete<span class="token operator">=</span>models<span class="token punctuation">.</span>CASCADE</span>
+<span class="line">    <span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># نص الرسالة</span></span>
+<span class="line">    <span class="token comment"># The actual text content of the message</span></span>
+<span class="line">    <span class="token comment"># يتم تخزين النص الكامل للرسالة في هذا الحقل</span></span>
+<span class="line">    <span class="token comment"># The full text of the message is stored in this field</span></span>
+<span class="line">    body <span class="token operator">=</span> models<span class="token punctuation">.</span>TextField<span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># علاقة ForeignKey مع المستخدم الذي استلم الرسالة</span></span>
+<span class="line">    <span class="token comment"># ForeignKey relationship to the user who received the message</span></span>
+<span class="line">    <span class="token comment"># هذا الحقل يشير إلى المستخدم الذي تلقى الرسالة</span></span>
+<span class="line">    <span class="token comment"># This field points to the user who received the message</span></span>
+<span class="line">    sent_to <span class="token operator">=</span> models<span class="token punctuation">.</span>ForeignKey<span class="token punctuation">(</span></span>
+<span class="line">        User<span class="token punctuation">,</span> related_name<span class="token operator">=</span><span class="token string">"received_messages"</span><span class="token punctuation">,</span> on_delete<span class="token operator">=</span>models<span class="token punctuation">.</span>CASCADE</span>
+<span class="line">    <span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># تاريخ ووقت إرسال الرسالة</span></span>
+<span class="line">    <span class="token comment"># Date and time when the message was sent</span></span>
+<span class="line">    <span class="token comment"># يتم تعيين تاريخ ووقت الإرسال تلقائيًا عند إرسال الرسالة</span></span>
+<span class="line">    <span class="token comment"># The created_at field is set automatically when the message is sent</span></span>
+<span class="line">    created_at <span class="token operator">=</span> models<span class="token punctuation">.</span>DateTimeField<span class="token punctuation">(</span>auto_now_add<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># علاقة ForeignKey مع المستخدم الذي أرسل الرسالة</span></span>
+<span class="line">    <span class="token comment"># ForeignKey relationship to the user who sent the message</span></span>
+<span class="line">    <span class="token comment"># هذا الحقل يشير إلى المستخدم الذي أرسل الرسالة</span></span>
+<span class="line">    <span class="token comment"># This field points to the user who sent the message</span></span>
+<span class="line">    created_by <span class="token operator">=</span> models<span class="token punctuation">.</span>ForeignKey<span class="token punctuation">(</span></span>
+<span class="line">        User<span class="token punctuation">,</span> related_name<span class="token operator">=</span><span class="token string">"sent_messages"</span><span class="token punctuation">,</span> on_delete<span class="token operator">=</span>models<span class="token punctuation">.</span>CASCADE</span>
+<span class="line">    <span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># دالة لإرجاع الوقت المنقضي منذ إرسال الرسالة بتنسيق قابل للقراءة البشرية</span></span>
+<span class="line">    <span class="token comment"># Method to return the time elapsed since the message was sent in a human-readable format</span></span>
+<span class="line">    <span class="token comment"># تستخدم هذه الدالة دالة timesince لعرض الفرق بين تاريخ الإرسال والوقت الحالي</span></span>
+<span class="line">    <span class="token comment"># This method uses the timesince function to display the difference between sent time and current time</span></span>
+<span class="line">    <span class="token keyword">def</span> <span class="token function">created_at_formatted</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="line">        <span class="token keyword">return</span> timesince<span class="token punctuation">(</span>self<span class="token punctuation">.</span>created_at<span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span class="token triple-quoted-string string">"""</span>
+<span class="line">هذا الكود عبارة عن نماذج (models) مخصصة لنظام دردشة في مشروع Django، حيث يحتوي على نموذجين رئيسيين: Conversation و ConversationMessage. إليك شرحًا تفصيليًا:</span>
+<span class="line"></span>
+<span class="line">1. استيراد المكتبات والموارد:</span>
+<span class="line">uuid: لإنشاء معرفات فريدة (UUID) تُستخدم لتعريف المحادثات والرسائل بشكل فريد.</span>
+<span class="line">models من django.db: لإنشاء نماذج قاعدة البيانات.</span>
+<span class="line">timesince من django.utils.timesince: دالة لعرض الفرق الزمني بصيغة قابلة للقراءة البشرية.</span>
+<span class="line">نموذج User من account.models: يشير إلى مستخدم في النظام.</span>
+<span class="line">2. نموذج المحادثة (Conversation):</span>
+<span class="line">الحقل id:</span>
+<span class="line">نوع الحقل: UUIDField.</span>
+<span class="line">يستخدم لتعيين معرف فريد لكل محادثة.</span>
+<span class="line">يحدد تلقائيًا باستخدام uuid4.</span>
+<span class="line">الحقل users:</span>
+<span class="line">نوع العلاقة: ManyToManyField.</span>
+<span class="line">يشير إلى علاقة بين المحادثة والعديد من المستخدمين، مما يسمح بوجود عدة مستخدمين في نفس المحادثة.</span>
+<span class="line">الحقل created_at:</span>
+<span class="line">نوع الحقل: DateTimeField.</span>
+<span class="line">يتم تحديد تاريخ ووقت إنشاء المحادثة تلقائيًا عند حفظها لأول مرة.</span>
+<span class="line">الحقل modified_at:</span>
+<span class="line">نوع الحقل: DateTimeField.</span>
+<span class="line">يتم تحديث هذا الحقل تلقائيًا عند أي تعديل في المحادثة.</span>
+<span class="line">الدالة modified_at_formatted:</span>
+<span class="line">تعرض الوقت المنقضي منذ إنشاء المحادثة باستخدام دالة timesince.</span>
+<span class="line">3. نموذج الرسالة (ConversationMessage):</span>
+<span class="line">الحقل id:</span>
+<span class="line">نوع الحقل: UUIDField.</span>
+<span class="line">معرف فريد لكل رسالة.</span>
+<span class="line">الحقل conversation:</span>
+<span class="line">نوع العلاقة: ForeignKey.</span>
+<span class="line">يشير إلى المحادثة التي تنتمي إليها الرسالة.</span>
+<span class="line">يتم حذف الرسالة إذا تم حذف المحادثة المرتبطة بها (on_delete=models.CASCADE).</span>
+<span class="line">الحقل body:</span>
+<span class="line">نوع الحقل: TextField.</span>
+<span class="line">يحتوي على النص الكامل للرسالة.</span>
+<span class="line">الحقل sent_to:</span>
+<span class="line">نوع العلاقة: ForeignKey.</span>
+<span class="line">يشير إلى المستخدم الذي تلقى الرسالة.</span>
+<span class="line">الحقل created_at:</span>
+<span class="line">نوع الحقل: DateTimeField.</span>
+<span class="line">يتم تعيين وقت وتاريخ الإرسال تلقائيًا عند إنشاء الرسالة.</span>
+<span class="line">الحقل created_by:</span>
+<span class="line">نوع العلاقة: ForeignKey.</span>
+<span class="line">يشير إلى المستخدم الذي أرسل الرسالة.</span>
+<span class="line">الدالة created_at_formatted:</span>
+<span class="line">تعرض الوقت المنقضي منذ إرسال الرسالة باستخدام timesince.</span>
+<span class="line">ملخص:</span>
+<span class="line">الكود يُعرّف نموذجًا للمحادثات يتيح للمستخدمين المشاركة في محادثات جماعية.</span>
+<span class="line">كل رسالة في المحادثة ترتبط بمستخدمين (المرسل والمتلقي) وتشير إلى المحادثة الأم.</span>
+<span class="line">الحقول الزمنية تسجل وقت الإنشاء والتعديل، ويتم عرض الفارق الزمني بطريقة مفهومة للبشر عبر دوال تنسيق الوقت.</span>
+<span class="line"></span>
+<span class="line">"""</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="🆕-makemigrations-1" tabindex="-1"><a class="header-anchor" href="#🆕-makemigrations-1"><span>🆕 Makemigrations</span></a></h3>
+<h6 id="🛠️-modifications-to-models-file-تعديلات-على-ملف-النماذج-1" tabindex="-1"><a class="header-anchor" href="#🛠️-modifications-to-models-file-تعديلات-على-ملف-النماذج-1"><span>🛠️ Modifications To Models File | تعديلات على ملف النماذج</span></a></h6>
+<div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">python manage.py makemigrations</span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h3 id="🛠️-makemigrations-1" tabindex="-1"><a class="header-anchor" href="#🛠️-makemigrations-1"><span>🛠️ Makemigrations</span></a></h3>
+<h6 id="🛠️-migrate-to-the-database-الانتقال-إلى-قاعدة-البيانات-1" tabindex="-1"><a class="header-anchor" href="#🛠️-migrate-to-the-database-الانتقال-إلى-قاعدة-البيانات-1"><span>🛠️ Migrate To The Database |الانتقال إلى قاعدة البيانات</span></a></h6>
+<div class="language-cmd line-numbers-mode" data-highlighter="prismjs" data-ext="cmd" data-title="cmd"><pre v-pre><code><span class="line">python manage.py migrate</span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><h3 id="💌-chat-page-admin-py" tabindex="-1"><a class="header-anchor" href="#💌-chat-page-admin-py"><span>💌 Chat Page [ admin.py ]</span></a></h3>
+<h4 id="💌-app-chat-page-admin-py-📝" tabindex="-1"><a class="header-anchor" href="#💌-app-chat-page-admin-py-📝"><span>💌 App [ Chat ] Page [ admin.py ] 📝</span></a></h4>
+<div class="language-python line-numbers-mode" data-highlighter="prismjs" data-ext="py" data-title="py"><pre v-pre><code><span class="line"><span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib <span class="token keyword">import</span> admin</span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># Register your models here.</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">from</span> <span class="token punctuation">.</span>models <span class="token keyword">import</span> Conversation<span class="token punctuation">,</span> ConversationMessage</span>
+<span class="line"></span>
+<span class="line">admin<span class="token punctuation">.</span>site<span class="token punctuation">.</span>register<span class="token punctuation">(</span>Conversation<span class="token punctuation">)</span></span>
+<span class="line">admin<span class="token punctuation">.</span>site<span class="token punctuation">.</span>register<span class="token punctuation">(</span>ConversationMessage<span class="token punctuation">)</span></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="💌-chat-page-serializers-py" tabindex="-1"><a class="header-anchor" href="#💌-chat-page-serializers-py"><span>💌 Chat Page [ serializers.py ]</span></a></h3>
+<h4 id="💌-app-chat-page-serializers-py-📝" tabindex="-1"><a class="header-anchor" href="#💌-app-chat-page-serializers-py-📝"><span>💌 App [ Chat ] Page [ serializers.py ] 📝</span></a></h4>
+<div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre v-pre><code><span class="line">serializers.py</span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><div class="language-python line-numbers-mode" data-highlighter="prismjs" data-ext="py" data-title="py"><pre v-pre><code><span class="line"><span class="token comment">#  📝 Page [ messenger/messenger_django/account/serializers.py ]</span></span>
+<span class="line"><span class="token triple-quoted-string string">"""</span>
+<span class="line">هذا الكود يحتوي على serializers من مكتبة Django REST Framework، وهو يستخدم لتحويل البيانات بين نماذج Django وواجهة برمجة التطبيقات (JSON). يتم استخدام هذه المحولات لتهيئة البيانات التي تُعرض للمستخدمين أو تُستقبل منهم بشكل منظم.</span>
+<span class="line"></span>
+<span class="line">شرح كل جزء من الكود:</span>
+<span class="line">1. استيراد المكتبات والموارد:</span>
+<span class="line">serializers من rest_framework: تُستخدم لإنشاء محولات البيانات.</span>
+<span class="line">UserSerializer من account.serializers: محول بيانات خاص بنموذج المستخدم.</span>
+<span class="line">نماذج Conversation وConversationMessage من .models: هي النماذج التي نريد تحويلها.</span>
+<span class="line">2. ConversationSerializer</span>
+<span class="line">الهدف: لتحويل نموذج المحادثة (Conversation) إلى JSON.</span>
+<span class="line">الحقل users:</span>
+<span class="line">يستخدم UserSerializer لعرض تفاصيل المستخدمين المرتبطين بالمحادثة.</span>
+<span class="line">الخاصية read_only=True تعني أن البيانات لا يمكن تعديلها من خلال هذا المحول.</span>
+<span class="line">many=True تعني أن الحقل يحتوي على قائمة من المستخدمين.</span>
+<span class="line">الفئة Meta:</span>
+<span class="line">تحدد النموذج المستخدم (Conversation).</span>
+<span class="line">تحدد الحقول التي سيتم تضمينها عند تحويل البيانات:</span>
+<span class="line">id: معرف المحادثة.</span>
+<span class="line">users: المستخدمون المشاركون.</span>
+<span class="line">modified_at_formatted: الوقت المنقضي منذ تعديل المحادثة.</span>
+<span class="line">3. ConversationMessageSerializer</span>
+<span class="line">الهدف: لتحويل نموذج الرسالة (ConversationMessage) إلى JSON.</span>
+<span class="line">الحقل sent_to و created_by**:</span>
+<span class="line">يستخدمان UserSerializer لعرض تفاصيل المستخدم الذي أُرسلت له الرسالة والمستخدم الذي أنشأ الرسالة.</span>
+<span class="line">read_only=True لأن هذه الحقول تُعرض فقط ولا يمكن تعديلها.</span>
+<span class="line">الفئة Meta:</span>
+<span class="line">تحدد النموذج المستخدم (ConversationMessage).</span>
+<span class="line">تحدد الحقول التي سيتم تضمينها عند تحويل البيانات:</span>
+<span class="line">id: معرف الرسالة.</span>
+<span class="line">sent_to: المستخدم المرسل إليه.</span>
+<span class="line">created_by: المستخدم الذي أرسل الرسالة.</span>
+<span class="line">created_at_formatted: الوقت المنقضي منذ إرسال الرسالة.</span>
+<span class="line">body: محتوى الرسالة.</span>
+<span class="line">4. ConversationDetailSerializer</span>
+<span class="line">الهدف: لعرض تفاصيل المحادثة مع الرسائل المرتبطة بها.</span>
+<span class="line">الحقل messages:</span>
+<span class="line">يستخدم ConversationMessageSerializer لتحويل الرسائل المرتبطة بالمحادثة.</span>
+<span class="line">read_only=True و many=True، مما يعني أنه يعرض قائمة من الرسائل ولا يمكن تعديلها.</span>
+<span class="line">الفئة Meta:</span>
+<span class="line">تحدد النموذج المستخدم (Conversation).</span>
+<span class="line">تحدد الحقول التي سيتم تضمينها عند تحويل البيانات:</span>
+<span class="line">id: معرف المحادثة.</span>
+<span class="line">users: المستخدمون المشاركون.</span>
+<span class="line">modified_at_formatted: الوقت المنقضي منذ تعديل المحادثة.</span>
+<span class="line">messages: الرسائل المرتبطة بالمحادثة.</span>
+<span class="line">ملخص:</span>
+<span class="line">هذه المحولات تساعد في تسهيل التعامل مع بيانات المحادثات والرسائل في واجهة برمجة التطبيقات، حيث تعرض البيانات بطريقة منسقة ومفصلة للمستخدمين.</span>
+<span class="line">read_only=True يضمن أن البيانات تُعرض فقط ولا يمكن تعديلها عبر واجهة برمجة التطبيقات.</span>
+<span class="line"></span>
+<span class="line">"""</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># 📝 Page [ messenger/messenger_django/chat/serializers.py ]</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">from</span> rest_framework <span class="token keyword">import</span> serializers</span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">from</span> account<span class="token punctuation">.</span>serializers <span class="token keyword">import</span> UserSerializer</span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">from</span> <span class="token punctuation">.</span>models <span class="token keyword">import</span> Conversation<span class="token punctuation">,</span> ConversationMessage</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">class</span> <span class="token class-name">ConversationSerializer</span><span class="token punctuation">(</span>serializers<span class="token punctuation">.</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="line">    users <span class="token operator">=</span> UserSerializer<span class="token punctuation">(</span>read_only<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> many<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span></span>
+<span class="line">        model <span class="token operator">=</span> Conversation</span>
+<span class="line">        fields <span class="token operator">=</span> <span class="token punctuation">(</span></span>
+<span class="line">            <span class="token string">"id"</span><span class="token punctuation">,</span></span>
+<span class="line">            <span class="token string">"users"</span><span class="token punctuation">,</span></span>
+<span class="line">            <span class="token string">"modified_at_formatted"</span><span class="token punctuation">,</span></span>
+<span class="line">        <span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">class</span> <span class="token class-name">ConversationMessageSerializer</span><span class="token punctuation">(</span>serializers<span class="token punctuation">.</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="line">    sent_to <span class="token operator">=</span> UserSerializer<span class="token punctuation">(</span>read_only<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></span>
+<span class="line">    created_by <span class="token operator">=</span> UserSerializer<span class="token punctuation">(</span>read_only<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span></span>
+<span class="line">        model <span class="token operator">=</span> ConversationMessage</span>
+<span class="line">        fields <span class="token operator">=</span> <span class="token punctuation">(</span></span>
+<span class="line">            <span class="token string">"id"</span><span class="token punctuation">,</span></span>
+<span class="line">            <span class="token string">"sent_to"</span><span class="token punctuation">,</span></span>
+<span class="line">            <span class="token string">"created_by"</span><span class="token punctuation">,</span></span>
+<span class="line">            <span class="token string">"created_at_formatted"</span><span class="token punctuation">,</span></span>
+<span class="line">            <span class="token string">"body"</span><span class="token punctuation">,</span></span>
+<span class="line">        <span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">class</span> <span class="token class-name">ConversationDetailSerializer</span><span class="token punctuation">(</span>serializers<span class="token punctuation">.</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="line">    messages <span class="token operator">=</span> ConversationMessageSerializer<span class="token punctuation">(</span>read_only<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> many<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span></span>
+<span class="line">        model <span class="token operator">=</span> Conversation</span>
+<span class="line">        fields <span class="token operator">=</span> <span class="token punctuation">(</span></span>
+<span class="line">            <span class="token string">"id"</span><span class="token punctuation">,</span></span>
+<span class="line">            <span class="token string">"users"</span><span class="token punctuation">,</span></span>
+<span class="line">            <span class="token string">"modified_at_formatted"</span><span class="token punctuation">,</span></span>
+<span class="line">            <span class="token string">"messages"</span><span class="token punctuation">,</span></span>
+<span class="line">        <span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="💌-chat-page-api-py" tabindex="-1"><a class="header-anchor" href="#💌-chat-page-api-py"><span>💌 Chat Page [ api.py ]</span></a></h3>
+<h4 id="💌-app-chat-page-api-py-📝" tabindex="-1"><a class="header-anchor" href="#💌-app-chat-page-api-py-📝"><span>💌 App [ Chat ] Page [ api.py ] 📝</span></a></h4>
+<div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre v-pre><code><span class="line">api.py</span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><div class="language-python line-numbers-mode" data-highlighter="prismjs" data-ext="py" data-title="py"><pre v-pre><code><span class="line"></span>
+<span class="line"><span class="token triple-quoted-string string">"""</span>
+<span class="line">هذا الكود يوضح كيفية إنشاء مجموعة من واجهات برمجة التطبيقات (APIs) للتعامل مع المحادثات والرسائل باستخدام Django REST Framework. إليك شرحًا تفصيليًا لكل دالة وما تقوم به:</span>
+<span class="line"></span>
+<span class="line">1. دالة conversation_list</span>
+<span class="line">الهدف: عرض جميع المحادثات التي يشارك فيها المستخدم الحالي.</span>
+<span class="line">الخطوات:</span>
+<span class="line">تصفية المحادثات التي تحتوي على المستخدم الحالي باستخدام filter(users__in=list([request.user])).</span>
+<span class="line">تحويل البيانات باستخدام ConversationSerializer.</span>
+<span class="line">إرجاع البيانات بشكل JSON إلى العميل باستخدام JsonResponse.</span>
+<span class="line">2. دالة conversation_detail</span>
+<span class="line">الهدف: عرض تفاصيل محادثة معينة بناءً على معرف المحادثة (pk).</span>
+<span class="line">الخطوات:</span>
+<span class="line">جلب المحادثة باستخدام get(pk=pk) وتصفية المحادثات التي تحتوي على المستخدم الحالي.</span>
+<span class="line">تحويل بيانات المحادثة باستخدام ConversationDetailSerializer.</span>
+<span class="line">إرسال التفاصيل بشكل JSON إلى العميل.</span>
+<span class="line">3. دالة conversation_get_or_create</span>
+<span class="line">الهدف: جلب محادثة بين المستخدم الحالي ومستخدم آخر معين أو إنشاء محادثة جديدة إذا لم تكن موجودة.</span>
+<span class="line">الخطوات:</span>
+<span class="line">جلب المستخدم الآخر باستخدام User.objects.get(pk=user_pk).</span>
+<span class="line">تصفية المحادثات التي تضم كلا المستخدمين.</span>
+<span class="line">إذا كانت المحادثة موجودة، يتم استخدام أول محادثة موجودة. وإذا لم تكن موجودة، يتم إنشاء محادثة جديدة وإضافة المستخدمين إليها.</span>
+<span class="line">تحويل البيانات باستخدام ConversationDetailSerializer وإرسالها بشكل JSON.</span>
+<span class="line">4. دالة conversation_send_message</span>
+<span class="line">الهدف: إرسال رسالة داخل محادثة محددة.</span>
+<span class="line">الخطوات:</span>
+<span class="line">جلب المحادثة باستخدام get(pk=pk) والتأكد من أن المستخدم الحالي جزء من المحادثة.</span>
+<span class="line">تحديد المستخدم المستلم للرسالة.</span>
+<span class="line">إنشاء رسالة جديدة باستخدام ConversationMessage.objects.create.</span>
+<span class="line">تحويل الرسالة باستخدام ConversationMessageSerializer وإرجاعها بشكل JSON.</span>
+<span class="line">ملاحظات إضافية:</span>
+<span class="line">الديكور @api_view(["GET"]): يحدد أن الدالة هي API وتدعم طريقة GET (يمكن أيضًا أن تدعم POST أو غيرها).</span>
+<span class="line">JsonResponse: يستخدم لإرسال البيانات إلى العميل في شكل JSON.</span>
+<span class="line">معالجة الأخطاء: لم تتم معالجة حالات الخطأ مثل عدم العثور على مستخدم أو محادثة، ويفضل إضافة استثناءات للتحقق من الأخطاء مثل DoesNotExist.</span>
+<span class="line">تحسينات محتملة:</span>
+<span class="line">إضافة مصادقة (authentication_classes) وصلاحيات (permission_classes) لضمان أن المستخدمين مصرح لهم بالوصول إلى هذه الدوال.</span>
+<span class="line">التعامل مع حالات الخطأ باستخدام try-except لإرجاع استجابات مناسبة مثل Http404 أو استجابة خطأ مخصصة.</span>
+<span class="line">هذا الكود يوفر بنية مرنة وسهلة للتعامل مع المحادثات والرسائل في تطبيقات الدردشة باستخدام Django REST Framework.</span>
+<span class="line"></span>
+<span class="line">"""</span></span>
+<span class="line"></span>
+<span class="line"><span class="token keyword">from</span> django<span class="token punctuation">.</span>http <span class="token keyword">import</span> JsonResponse</span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># 📝 لتحديد أن هذه الدالة هي API view</span></span>
+<span class="line"><span class="token comment"># 🔐 لتحديد الكلاسات المسؤولة عن المصادقة</span></span>
+<span class="line"><span class="token comment"># 🔑 لتحديد الكلاسات المسؤولة عن الصلاحيات</span></span>
+<span class="line"><span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>decorators <span class="token keyword">import</span> <span class="token punctuation">(</span></span>
+<span class="line">    api_view<span class="token punctuation">,</span></span>
+<span class="line">    authentication_classes<span class="token punctuation">,</span></span>
+<span class="line">    permission_classes<span class="token punctuation">,</span></span>
+<span class="line"><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># 👤 استيراد نموذج المستخدم من التطبيق</span></span>
+<span class="line"><span class="token keyword">from</span> account<span class="token punctuation">.</span>models <span class="token keyword">import</span> User</span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># 💬 استيراد النماذج الخاصة بالمحادثات والرسائل</span></span>
+<span class="line"><span class="token keyword">from</span> <span class="token punctuation">.</span>models <span class="token keyword">import</span> <span class="token punctuation">(</span></span>
+<span class="line">    Conversation<span class="token punctuation">,</span></span>
+<span class="line">    ConversationMessage<span class="token punctuation">,</span></span>
+<span class="line"><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># 🧩 تعريف السيريالايزر للمحادثات</span></span>
+<span class="line"><span class="token comment"># 🔍 سيريالايزر لعرض تفاصيل المحادثة</span></span>
+<span class="line"><span class="token comment"># 📝 سيريالايزر لعرض تفاصيل الرسائل</span></span>
+<span class="line"><span class="token keyword">from</span> <span class="token punctuation">.</span>serializers <span class="token keyword">import</span> <span class="token punctuation">(</span></span>
+<span class="line">    ConversationSerializer<span class="token punctuation">,</span></span>
+<span class="line">    ConversationDetailSerializer<span class="token punctuation">,</span></span>
+<span class="line">    ConversationMessageSerializer<span class="token punctuation">,</span></span>
+<span class="line"><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># 🚀 هذا الديكور يتم تطبيقه لتحديد أن هذه دالة GET API</span></span>
+<span class="line"><span class="token comment"># 📋 دالة لعرض جميع المحادثات الخاصة بالمستخدم</span></span>
+<span class="line"><span class="token decorator annotation punctuation">@api_view</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"GET"</span><span class="token punctuation">]</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token keyword">def</span> <span class="token function">conversation_list</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="line">    <span class="token comment"># 🧐 تصفية المحادثات التي تضم المستخدم الحالي</span></span>
+<span class="line">    conversations <span class="token operator">=</span> Conversation<span class="token punctuation">.</span>objects<span class="token punctuation">.</span><span class="token builtin">filter</span><span class="token punctuation">(</span>users__in<span class="token operator">=</span><span class="token builtin">list</span><span class="token punctuation">(</span><span class="token punctuation">[</span>request<span class="token punctuation">.</span>user<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token comment"># 🧩 تحويل البيانات إلى الشكل المناسب</span></span>
+<span class="line">    serializer <span class="token operator">=</span> ConversationSerializer<span class="token punctuation">(</span>conversations<span class="token punctuation">,</span> many<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># 📡 إرسال البيانات إلى العميل في شكل JSON</span></span>
+<span class="line">    <span class="token keyword">return</span> JsonResponse<span class="token punctuation">(</span>serializer<span class="token punctuation">.</span>data<span class="token punctuation">,</span> safe<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># 🚀 دالة لعرض تفاصيل محادثة معينة</span></span>
+<span class="line"><span class="token comment"># 🔑 تحديد المحادثة باستخدام الـ pk</span></span>
+<span class="line"><span class="token decorator annotation punctuation">@api_view</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"GET"</span><span class="token punctuation">]</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token keyword">def</span> <span class="token function">conversation_detail</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> pk<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="line">    <span class="token comment"># 🕵️‍♂️ جلب المحادثة باستخدام الـ pk</span></span>
+<span class="line">    conversation <span class="token operator">=</span> Conversation<span class="token punctuation">.</span>objects<span class="token punctuation">.</span><span class="token builtin">filter</span><span class="token punctuation">(</span>users__in<span class="token operator">=</span><span class="token builtin">list</span><span class="token punctuation">(</span><span class="token punctuation">[</span>request<span class="token punctuation">.</span>user<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>get<span class="token punctuation">(</span></span>
+<span class="line">        pk<span class="token operator">=</span>pk</span>
+<span class="line">    <span class="token punctuation">)</span></span>
+<span class="line">    <span class="token comment"># 🔍 تحويل بيانات المحادثة إلى الشكل المناسب</span></span>
+<span class="line">    serializer <span class="token operator">=</span> ConversationDetailSerializer<span class="token punctuation">(</span>conversation<span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># 📡 إرسال التفاصيل إلى العميل</span></span>
+<span class="line">    <span class="token keyword">return</span> JsonResponse<span class="token punctuation">(</span>serializer<span class="token punctuation">.</span>data<span class="token punctuation">,</span> safe<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># 🚀 دالة للحصول على محادثة أو إنشائها إذا لم تكن موجودة</span></span>
+<span class="line"><span class="token comment"># 👤 المستخدم المستهدف الذي سنتحقق من وجود محادثة معه</span></span>
+<span class="line"><span class="token decorator annotation punctuation">@api_view</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"GET"</span><span class="token punctuation">]</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token keyword">def</span> <span class="token function">conversation_get_or_create</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> user_pk<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="line">    <span class="token comment"># 🔍 جلب المستخدم المستهدف باستخدام الـ pk</span></span>
+<span class="line">    user <span class="token operator">=</span> User<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>get<span class="token punctuation">(</span>pk<span class="token operator">=</span>user_pk<span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># 🧐 تصفية المحادثات التي تضم المستخدمين</span></span>
+<span class="line">    conversations <span class="token operator">=</span> Conversation<span class="token punctuation">.</span>objects<span class="token punctuation">.</span><span class="token builtin">filter</span><span class="token punctuation">(</span>users__in<span class="token operator">=</span><span class="token builtin">list</span><span class="token punctuation">(</span><span class="token punctuation">[</span>request<span class="token punctuation">.</span>user<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">filter</span><span class="token punctuation">(</span></span>
+<span class="line">        users__in<span class="token operator">=</span><span class="token builtin">list</span><span class="token punctuation">(</span><span class="token punctuation">[</span>user<span class="token punctuation">]</span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># ✅ إذا كانت المحادثة موجودة</span></span>
+<span class="line">    <span class="token keyword">if</span> conversations<span class="token punctuation">.</span>exists<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="line">        <span class="token comment"># 🔄 أخذ أول محادثة موجودة</span></span>
+<span class="line">        conversation <span class="token operator">=</span> conversations<span class="token punctuation">.</span>first<span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line">    <span class="token comment"># 🚫 إذا لم تكن المحادثة موجودة</span></span>
+<span class="line">    <span class="token keyword">else</span><span class="token punctuation">:</span></span>
+<span class="line">        <span class="token comment"># 🛠 إنشاء محادثة جديدة</span></span>
+<span class="line">        conversation <span class="token operator">=</span> Conversation<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>create<span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line">        <span class="token comment"># 👥 إضافة المستخدمين إلى المحادثة</span></span>
+<span class="line">        conversation<span class="token punctuation">.</span>users<span class="token punctuation">.</span>add<span class="token punctuation">(</span>user<span class="token punctuation">,</span> request<span class="token punctuation">.</span>user<span class="token punctuation">)</span></span>
+<span class="line">        <span class="token comment"># 💾 حفظ المحادثة الجديدة</span></span>
+<span class="line">        conversation<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># 🧩 تحويل البيانات إلى الشكل المناسب</span></span>
+<span class="line">    serializer <span class="token operator">=</span> ConversationDetailSerializer<span class="token punctuation">(</span>conversation<span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># 📡 إرسال البيانات إلى العميل</span></span>
+<span class="line">    <span class="token keyword">return</span> JsonResponse<span class="token punctuation">(</span>serializer<span class="token punctuation">.</span>data<span class="token punctuation">,</span> safe<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># 🚀 دالة لإرسال رسالة داخل المحادثة</span></span>
+<span class="line"><span class="token comment"># 💬 إرسال رسالة إلى المحادثة المحددة</span></span>
+<span class="line"><span class="token decorator annotation punctuation">@api_view</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"POST"</span><span class="token punctuation">]</span><span class="token punctuation">)</span></span>
+<span class="line"><span class="token keyword">def</span> <span class="token function">conversation_send_message</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> pk<span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="line">    <span class="token comment"># 🕵️‍♂️ جلب المحادثة باستخدام الـ pk</span></span>
+<span class="line">    conversation <span class="token operator">=</span> Conversation<span class="token punctuation">.</span>objects<span class="token punctuation">.</span><span class="token builtin">filter</span><span class="token punctuation">(</span>users__in<span class="token operator">=</span><span class="token builtin">list</span><span class="token punctuation">(</span><span class="token punctuation">[</span>request<span class="token punctuation">.</span>user<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>get<span class="token punctuation">(</span></span>
+<span class="line">        pk<span class="token operator">=</span>pk</span>
+<span class="line">    <span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># 👥 التحقق من جميع المستخدمين في المحادثة</span></span>
+<span class="line">    <span class="token keyword">for</span> user <span class="token keyword">in</span> conversation<span class="token punctuation">.</span>users<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span></span>
+<span class="line">        <span class="token comment"># ❌ استبعاد المستخدم الحالي</span></span>
+<span class="line">        <span class="token keyword">if</span> user <span class="token operator">!=</span> request<span class="token punctuation">.</span>user<span class="token punctuation">:</span></span>
+<span class="line">            <span class="token comment"># 📤 تحديد المستلم</span></span>
+<span class="line">            sent_to <span class="token operator">=</span> user</span>
+<span class="line"></span>
+<span class="line">    conversation_message <span class="token operator">=</span> ConversationMessage<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>create<span class="token punctuation">(</span></span>
+<span class="line">        <span class="token comment"># ✉️ إنشاء الرسالة</span></span>
+<span class="line">        conversation<span class="token operator">=</span>conversation<span class="token punctuation">,</span></span>
+<span class="line">        <span class="token comment"># 📝 جلب نص الرسالة من البيانات المدخلة</span></span>
+<span class="line">        body<span class="token operator">=</span>request<span class="token punctuation">.</span>data<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"body"</span><span class="token punctuation">)</span><span class="token punctuation">,</span></span>
+<span class="line">        <span class="token comment"># 🖊️ تحديد من أنشأ الرسالة</span></span>
+<span class="line">        created_by<span class="token operator">=</span>request<span class="token punctuation">.</span>user<span class="token punctuation">,</span></span>
+<span class="line">        <span class="token comment"># 📬 تحديد من أُرسلت إليه الرسالة</span></span>
+<span class="line">        sent_to<span class="token operator">=</span>sent_to<span class="token punctuation">,</span></span>
+<span class="line">    <span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># 🧩 تحويل البيانات إلى الشكل المناسب</span></span>
+<span class="line">    serializer <span class="token operator">=</span> ConversationMessageSerializer<span class="token punctuation">(</span>conversation_message<span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line">    <span class="token comment"># 📡 إرسال الرسالة إلى العميل</span></span>
+<span class="line">    <span class="token keyword">return</span> JsonResponse<span class="token punctuation">(</span>serializer<span class="token punctuation">.</span>data<span class="token punctuation">,</span> safe<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span></span>
+<span class="line"></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="💌-chat-page-urls-py" tabindex="-1"><a class="header-anchor" href="#💌-chat-page-urls-py"><span>💌 Chat Page [ urls.py ]</span></a></h3>
+<h4 id="💌-app-chat-page-urls-py-📝" tabindex="-1"><a class="header-anchor" href="#💌-app-chat-page-urls-py-📝"><span>💌 App [ Chat ] Page [ urls.py ] 📝</span></a></h4>
+<div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre v-pre><code><span class="line">urls.py</span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><div class="language-python line-numbers-mode" data-highlighter="prismjs" data-ext="py" data-title="py"><pre v-pre><code><span class="line"><span class="token triple-quoted-string string">"""</span>
+<span class="line">هذا الكود يوضح كيفية إعداد مسارات الـ URLs لتطبيق محادثات في Django باستخدام دالة path. إليك شرحًا تفصيليًا للرمز:</span>
+<span class="line"></span>
+<span class="line">1. استيراد path</span>
+<span class="line">يتم استيراد دالة path من django.urls لإنشاء مسارات الـ URLs الخاصة بالتطبيق.</span>
+<span class="line">2. استيراد وحدة api</span>
+<span class="line">يتم استيراد وحدة api من نفس التطبيق الذي يحتوي على الدوال (واجهات برمجة التطبيقات) التي تم تعريفها سابقًا مثل conversation_list و conversation_detail.</span>
+<span class="line">3. قائمة urlpatterns</span>
+<span class="line">قائمة تحتوي على جميع المسارات المتاحة التي يقدمها التطبيق.</span>
+<span class="line">تفاصيل كل مسار:</span>
+<span class="line">عرض قائمة المحادثات</span>
+<span class="line"></span>
+<span class="line">المسار: "" (المسار الرئيسي للتطبيق).</span>
+<span class="line">الدالة المستدعاة: api.conversation_list.</span>
+<span class="line">الاسم: conversation_list لتسهيل الرجوع إلى هذا المسار في أماكن أخرى من التطبيق.</span>
+<span class="line">عرض تفاصيل المحادثة</span>
+<span class="line"></span>
+<span class="line">المسار: "&lt;uuid:pk>/"، حيث يتم تمرير الـ UUID الخاص بالمحادثة كجزء من الـ URL.</span>
+<span class="line">الدالة المستدعاة: api.conversation_detail.</span>
+<span class="line">الاسم: conversation_detail.</span>
+<span class="line">إرسال رسالة جديدة في المحادثة</span>
+<span class="line"></span>
+<span class="line">المسار: "&lt;uuid:pk>/send/".</span>
+<span class="line">الدالة المستدعاة: api.conversation_send_message.</span>
+<span class="line">الاسم: conversation_send_message.</span>
+<span class="line">الحصول على محادثة مع مستخدم أو إنشاؤها</span>
+<span class="line"></span>
+<span class="line">المسار: "&lt;uuid:user_pk>/get-or-create/".</span>
+<span class="line">الدالة المستدعاة: api.conversation_get_or_create.</span>
+<span class="line">الاسم: conversation_get_or_create.</span>
+<span class="line">ملاحظات إضافية:</span>
+<span class="line">يتم استخدام الـ UUID في المسارات لتحديد المحادثات والمستخدمين بشكل فريد.</span>
+<span class="line">هذه المسارات تستخدم دوال API التي تم تعريفها مسبقًا وتعيد استجابات JSON.</span>
+<span class="line">تحسينات محتملة:</span>
+<span class="line">يمكن إضافة مصادقة وصلاحيات عند استدعاء هذه الدوال لضمان أمان التطبيق.</span>
+<span class="line">يمكن إضافة استثناءات مخصصة للتعامل مع الأخطاء مثل Http404.</span>
+<span class="line">هذا الكود يُعتبر جزءًا أساسيًا من أي تطبيق يعتمد على نظام المحادثات، حيث يوفر واجهات واضحة للوصول إلى المحادثات، عرض التفاصيل، وإرسال الرسائل.</span>
+<span class="line"></span>
+<span class="line">"""</span></span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># 🛤️ استيراد دالة `path` لإنشاء مسارات URL</span></span>
+<span class="line"><span class="token keyword">from</span> django<span class="token punctuation">.</span>urls <span class="token keyword">import</span> path</span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># 📦 استيراد وحدة `api` من نفس التطبيق</span></span>
+<span class="line"><span class="token keyword">from</span> <span class="token punctuation">.</span> <span class="token keyword">import</span> api</span>
+<span class="line"></span>
+<span class="line"><span class="token comment"># 🗺️ قائمة `urlpatterns` لتحديد جميع مسارات الـ URL التي يقدمها التطبيق</span></span>
+<span class="line">urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span></span>
+<span class="line">    <span class="token comment"># 📋 عرض قائمة المحادثات (المسار الرئيسي)</span></span>
+<span class="line">    path<span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> api<span class="token punctuation">.</span>conversation_list<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"conversation_list"</span><span class="token punctuation">)</span><span class="token punctuation">,</span></span>
+<span class="line">    <span class="token comment"># 🔍 عرض تفاصيل المحادثة بناءً على الـ UUID الخاص بها</span></span>
+<span class="line">    path<span class="token punctuation">(</span><span class="token string">"&lt;uuid:pk>/"</span><span class="token punctuation">,</span> api<span class="token punctuation">.</span>conversation_detail<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"conversation_detail"</span><span class="token punctuation">)</span><span class="token punctuation">,</span></span>
+<span class="line">    <span class="token comment"># ✉️ إرسال رسالة جديدة في المحادثة المحددة</span></span>
+<span class="line">    <span class="token comment"># 📝 استدعاء دالة `conversation_send_message` من وحدة `api`</span></span>
+<span class="line">    <span class="token comment"># 🏷️ اسم المسار لتحديده في أماكن أخرى</span></span>
+<span class="line">    path<span class="token punctuation">(</span></span>
+<span class="line">        <span class="token string">"&lt;uuid:pk>/send/"</span><span class="token punctuation">,</span></span>
+<span class="line">        api<span class="token punctuation">.</span>conversation_send_message<span class="token punctuation">,</span></span>
+<span class="line">        name<span class="token operator">=</span><span class="token string">"conversation_send_message"</span><span class="token punctuation">,</span></span>
+<span class="line">    <span class="token punctuation">)</span><span class="token punctuation">,</span></span>
+<span class="line">    <span class="token comment"># 🛠️ الحصول على محادثة مع مستخدم أو إنشاؤها إذا لم تكن موجودة</span></span>
+<span class="line">    <span class="token comment"># 🔄 استدعاء دالة `conversation_get_or_create` من وحدة `api`</span></span>
+<span class="line">    <span class="token comment"># 🏷️ اسم المسار لاستخدامه في أماكن أخرى من التطبيق</span></span>
+<span class="line">    path<span class="token punctuation">(</span></span>
+<span class="line">        <span class="token string">"&lt;uuid:user_pk>/get-or-create/"</span><span class="token punctuation">,</span></span>
+<span class="line">        api<span class="token punctuation">.</span>conversation_get_or_create<span class="token punctuation">,</span></span>
+<span class="line">        name<span class="token operator">=</span><span class="token string">"conversation_get_or_create"</span><span class="token punctuation">,</span></span>
+<span class="line">    <span class="token punctuation">)</span><span class="token punctuation">,</span></span>
+<span class="line"><span class="token punctuation">]</span></span>
+<span class="line"></span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="⚙️-project-page-urls-py-1" tabindex="-1"><a class="header-anchor" href="#⚙️-project-page-urls-py-1"><span>⚙️ Project Page [ urls.py ]</span></a></h3>
+<h6 id="⚙-project-page-urls-py-📝-1" tabindex="-1"><a class="header-anchor" href="#⚙-project-page-urls-py-📝-1"><span>⚙ Project Page [ urls.py ] 📝</span></a></h6>
+<div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text" data-title="text"><pre v-pre><code><span class="line"># 📄 ملف [ messenger/messenger_django/messenger_django/urls.py ]</span>
+<span class="line"></span>
+<span class="line"># 🌐 Main URL Configuration for Django Project</span>
+<span class="line"># 🌐 تكوين الروابط الرئيسية لمشروع Django</span>
+<span class="line"></span>
+<span class="line">from django.contrib import admin</span>
+<span class="line">from django.urls import path, include</span>
+<span class="line">from django.conf import settings</span>
+<span class="line">from django.conf.urls.static import static</span>
+<span class="line"></span>
+<span class="line">urlpatterns = [</span>
+<span class="line">    # ...</span>
+<span class="line">    #</span>
+<span class="line">    path('api/chat/', include('chat.urls')),</span>
+<span class="line">    # ...</span>
+<span class="line">]</span>
+<span class="line"></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><hr>
 <hr>
 <hr>
 <hr>

@@ -2731,6 +2731,603 @@ Account/ProfileView.vue
 python manage.py startapp chat
 ```
 
+### ⚙️ Settings
+
+#### ⚙️ Page Settings [ settings.py ] 📝
+
+```python
+INSTALLED_APPS = [
+    # ...
+    # Apps
+    "chat",
+    # Libraries
+    # ...
+]
+```
+
+### ⚙️ Chat Page [ models.py ]
+
+#### 💌 App [ Chat ] Page [ models.py ] 📝
+
+```python
+# استيراد uuid لإنشاء معرّفات فريدة
+# Import uuid to generate unique identifiers
+import uuid
+
+# استيراد النماذج من Django
+# Import models from Django
+from django.db import models
+
+# استيراد الدالة timesince لتنسيق الوقت
+# Import the timesince function to format time
+from django.utils.timesince import timesince
+
+# استيراد نموذج المستخدم
+# Import the User model
+from account.models import User
+
+
+# نموذج المحادثة
+# Conversation model
+class Conversation(models.Model):
+    # معرف فريد للمحادثة
+    # Unique identifier for the conversation
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    # علاقة ManyToMany مع المستخدمين
+    # Many-to-many relationship with users
+    # هذه العلاقة تسمح بوجود العديد من المستخدمين في نفس المحادثة
+    # This relationship allows multiple users to be part of the same conversation
+    users = models.ManyToManyField(User, related_name="conversations")
+
+    # تاريخ ووقت إنشاء المحادثة
+    # Date and time when the conversation was created
+    # يتم تحديد تاريخ ووقت الإنشاء تلقائيًا عند إضافة المحادثة
+    # The created_at field is set automatically when the conversation is created
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    # تاريخ ووقت آخر تعديل للمحادثة
+    # Date and time of the last modification of the conversation
+    # يتم تحديث هذا الحقل تلقائيًا عند أي تعديل على المحادثة
+    # This field gets updated automatically on any modification of the conversation
+    modified_at = models.DateTimeField(auto_now=True)
+
+    # دالة لإرجاع الوقت المنقضي منذ إنشاء المحادثة بتنسيق قابل للقراءة البشرية
+    # Method to return the time elapsed since the conversation was created in a human-readable format
+    # تستخدم هذه الدالة دالة timesince لعرض الفرق بين تاريخ الإنشاء والوقت الحالي
+    # This method uses the timesince function to display the difference between creation time and current time
+    def modified_at_formatted(self):
+        return timesince(self.created_at)
+
+
+# نموذج الرسالة في المحادثة
+# Conversation message model
+class ConversationMessage(models.Model):
+    # معرف فريد للرسالة
+    # Unique identifier for the message
+    # يتم تعيين معرف فريد لكل رسالة باستخدام UUID
+    # Each message is assigned a unique identifier using UUID
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    # علاقة ForeignKey مع المحادثة التي تنتمي إليها الرسالة
+    # ForeignKey relationship to the conversation that the message belongs to
+    # هذه العلاقة تشير إلى المحادثة التي تنتمي إليها الرسالة
+    # This relationship points to the conversation that the message belongs to
+    conversation = models.ForeignKey(
+        Conversation, related_name="messages", on_delete=models.CASCADE
+    )
+
+    # نص الرسالة
+    # The actual text content of the message
+    # يتم تخزين النص الكامل للرسالة في هذا الحقل
+    # The full text of the message is stored in this field
+    body = models.TextField()
+
+    # علاقة ForeignKey مع المستخدم الذي استلم الرسالة
+    # ForeignKey relationship to the user who received the message
+    # هذا الحقل يشير إلى المستخدم الذي تلقى الرسالة
+    # This field points to the user who received the message
+    sent_to = models.ForeignKey(
+        User, related_name="received_messages", on_delete=models.CASCADE
+    )
+
+    # تاريخ ووقت إرسال الرسالة
+    # Date and time when the message was sent
+    # يتم تعيين تاريخ ووقت الإرسال تلقائيًا عند إرسال الرسالة
+    # The created_at field is set automatically when the message is sent
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    # علاقة ForeignKey مع المستخدم الذي أرسل الرسالة
+    # ForeignKey relationship to the user who sent the message
+    # هذا الحقل يشير إلى المستخدم الذي أرسل الرسالة
+    # This field points to the user who sent the message
+    created_by = models.ForeignKey(
+        User, related_name="sent_messages", on_delete=models.CASCADE
+    )
+
+    # دالة لإرجاع الوقت المنقضي منذ إرسال الرسالة بتنسيق قابل للقراءة البشرية
+    # Method to return the time elapsed since the message was sent in a human-readable format
+    # تستخدم هذه الدالة دالة timesince لعرض الفرق بين تاريخ الإرسال والوقت الحالي
+    # This method uses the timesince function to display the difference between sent time and current time
+    def created_at_formatted(self):
+        return timesince(self.created_at)
+
+
+"""
+هذا الكود عبارة عن نماذج (models) مخصصة لنظام دردشة في مشروع Django، حيث يحتوي على نموذجين رئيسيين: Conversation و ConversationMessage. إليك شرحًا تفصيليًا:
+
+1. استيراد المكتبات والموارد:
+uuid: لإنشاء معرفات فريدة (UUID) تُستخدم لتعريف المحادثات والرسائل بشكل فريد.
+models من django.db: لإنشاء نماذج قاعدة البيانات.
+timesince من django.utils.timesince: دالة لعرض الفرق الزمني بصيغة قابلة للقراءة البشرية.
+نموذج User من account.models: يشير إلى مستخدم في النظام.
+2. نموذج المحادثة (Conversation):
+الحقل id:
+نوع الحقل: UUIDField.
+يستخدم لتعيين معرف فريد لكل محادثة.
+يحدد تلقائيًا باستخدام uuid4.
+الحقل users:
+نوع العلاقة: ManyToManyField.
+يشير إلى علاقة بين المحادثة والعديد من المستخدمين، مما يسمح بوجود عدة مستخدمين في نفس المحادثة.
+الحقل created_at:
+نوع الحقل: DateTimeField.
+يتم تحديد تاريخ ووقت إنشاء المحادثة تلقائيًا عند حفظها لأول مرة.
+الحقل modified_at:
+نوع الحقل: DateTimeField.
+يتم تحديث هذا الحقل تلقائيًا عند أي تعديل في المحادثة.
+الدالة modified_at_formatted:
+تعرض الوقت المنقضي منذ إنشاء المحادثة باستخدام دالة timesince.
+3. نموذج الرسالة (ConversationMessage):
+الحقل id:
+نوع الحقل: UUIDField.
+معرف فريد لكل رسالة.
+الحقل conversation:
+نوع العلاقة: ForeignKey.
+يشير إلى المحادثة التي تنتمي إليها الرسالة.
+يتم حذف الرسالة إذا تم حذف المحادثة المرتبطة بها (on_delete=models.CASCADE).
+الحقل body:
+نوع الحقل: TextField.
+يحتوي على النص الكامل للرسالة.
+الحقل sent_to:
+نوع العلاقة: ForeignKey.
+يشير إلى المستخدم الذي تلقى الرسالة.
+الحقل created_at:
+نوع الحقل: DateTimeField.
+يتم تعيين وقت وتاريخ الإرسال تلقائيًا عند إنشاء الرسالة.
+الحقل created_by:
+نوع العلاقة: ForeignKey.
+يشير إلى المستخدم الذي أرسل الرسالة.
+الدالة created_at_formatted:
+تعرض الوقت المنقضي منذ إرسال الرسالة باستخدام timesince.
+ملخص:
+الكود يُعرّف نموذجًا للمحادثات يتيح للمستخدمين المشاركة في محادثات جماعية.
+كل رسالة في المحادثة ترتبط بمستخدمين (المرسل والمتلقي) وتشير إلى المحادثة الأم.
+الحقول الزمنية تسجل وقت الإنشاء والتعديل، ويتم عرض الفارق الزمني بطريقة مفهومة للبشر عبر دوال تنسيق الوقت.
+
+"""
+```
+
+### 🆕 Makemigrations
+
+###### 🛠️ Modifications To Models File | تعديلات على ملف النماذج
+
+```cmd
+python manage.py makemigrations
+```
+
+### 🛠️ Makemigrations
+
+###### 🛠️ Migrate To The Database |الانتقال إلى قاعدة البيانات
+
+```cmd
+python manage.py migrate
+```
+
+### 💌 Chat Page [ admin.py ]
+
+#### 💌 App [ Chat ] Page [ admin.py ] 📝
+
+```python
+from django.contrib import admin
+
+# Register your models here.
+
+from .models import Conversation, ConversationMessage
+
+admin.site.register(Conversation)
+admin.site.register(ConversationMessage)
+```
+
+### 💌 Chat Page [ serializers.py ]
+
+#### 💌 App [ Chat ] Page [ serializers.py ] 📝
+
+```
+serializers.py
+```
+
+```python
+#  📝 Page [ messenger/messenger_django/account/serializers.py ]
+"""
+هذا الكود يحتوي على serializers من مكتبة Django REST Framework، وهو يستخدم لتحويل البيانات بين نماذج Django وواجهة برمجة التطبيقات (JSON). يتم استخدام هذه المحولات لتهيئة البيانات التي تُعرض للمستخدمين أو تُستقبل منهم بشكل منظم.
+
+شرح كل جزء من الكود:
+1. استيراد المكتبات والموارد:
+serializers من rest_framework: تُستخدم لإنشاء محولات البيانات.
+UserSerializer من account.serializers: محول بيانات خاص بنموذج المستخدم.
+نماذج Conversation وConversationMessage من .models: هي النماذج التي نريد تحويلها.
+2. ConversationSerializer
+الهدف: لتحويل نموذج المحادثة (Conversation) إلى JSON.
+الحقل users:
+يستخدم UserSerializer لعرض تفاصيل المستخدمين المرتبطين بالمحادثة.
+الخاصية read_only=True تعني أن البيانات لا يمكن تعديلها من خلال هذا المحول.
+many=True تعني أن الحقل يحتوي على قائمة من المستخدمين.
+الفئة Meta:
+تحدد النموذج المستخدم (Conversation).
+تحدد الحقول التي سيتم تضمينها عند تحويل البيانات:
+id: معرف المحادثة.
+users: المستخدمون المشاركون.
+modified_at_formatted: الوقت المنقضي منذ تعديل المحادثة.
+3. ConversationMessageSerializer
+الهدف: لتحويل نموذج الرسالة (ConversationMessage) إلى JSON.
+الحقل sent_to و created_by**:
+يستخدمان UserSerializer لعرض تفاصيل المستخدم الذي أُرسلت له الرسالة والمستخدم الذي أنشأ الرسالة.
+read_only=True لأن هذه الحقول تُعرض فقط ولا يمكن تعديلها.
+الفئة Meta:
+تحدد النموذج المستخدم (ConversationMessage).
+تحدد الحقول التي سيتم تضمينها عند تحويل البيانات:
+id: معرف الرسالة.
+sent_to: المستخدم المرسل إليه.
+created_by: المستخدم الذي أرسل الرسالة.
+created_at_formatted: الوقت المنقضي منذ إرسال الرسالة.
+body: محتوى الرسالة.
+4. ConversationDetailSerializer
+الهدف: لعرض تفاصيل المحادثة مع الرسائل المرتبطة بها.
+الحقل messages:
+يستخدم ConversationMessageSerializer لتحويل الرسائل المرتبطة بالمحادثة.
+read_only=True و many=True، مما يعني أنه يعرض قائمة من الرسائل ولا يمكن تعديلها.
+الفئة Meta:
+تحدد النموذج المستخدم (Conversation).
+تحدد الحقول التي سيتم تضمينها عند تحويل البيانات:
+id: معرف المحادثة.
+users: المستخدمون المشاركون.
+modified_at_formatted: الوقت المنقضي منذ تعديل المحادثة.
+messages: الرسائل المرتبطة بالمحادثة.
+ملخص:
+هذه المحولات تساعد في تسهيل التعامل مع بيانات المحادثات والرسائل في واجهة برمجة التطبيقات، حيث تعرض البيانات بطريقة منسقة ومفصلة للمستخدمين.
+read_only=True يضمن أن البيانات تُعرض فقط ولا يمكن تعديلها عبر واجهة برمجة التطبيقات.
+
+"""
+
+# 📝 Page [ messenger/messenger_django/chat/serializers.py ]
+
+from rest_framework import serializers
+
+from account.serializers import UserSerializer
+
+from .models import Conversation, ConversationMessage
+
+
+class ConversationSerializer(serializers.ModelSerializer):
+    users = UserSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = Conversation
+        fields = (
+            "id",
+            "users",
+            "modified_at_formatted",
+        )
+
+
+class ConversationMessageSerializer(serializers.ModelSerializer):
+    sent_to = UserSerializer(read_only=True)
+    created_by = UserSerializer(read_only=True)
+
+    class Meta:
+        model = ConversationMessage
+        fields = (
+            "id",
+            "sent_to",
+            "created_by",
+            "created_at_formatted",
+            "body",
+        )
+
+
+class ConversationDetailSerializer(serializers.ModelSerializer):
+    messages = ConversationMessageSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = Conversation
+        fields = (
+            "id",
+            "users",
+            "modified_at_formatted",
+            "messages",
+        )
+
+```
+
+### 💌 Chat Page [ api.py ]
+
+#### 💌 App [ Chat ] Page [ api.py ] 📝
+
+```
+api.py
+```
+
+```python
+
+"""
+هذا الكود يوضح كيفية إنشاء مجموعة من واجهات برمجة التطبيقات (APIs) للتعامل مع المحادثات والرسائل باستخدام Django REST Framework. إليك شرحًا تفصيليًا لكل دالة وما تقوم به:
+
+1. دالة conversation_list
+الهدف: عرض جميع المحادثات التي يشارك فيها المستخدم الحالي.
+الخطوات:
+تصفية المحادثات التي تحتوي على المستخدم الحالي باستخدام filter(users__in=list([request.user])).
+تحويل البيانات باستخدام ConversationSerializer.
+إرجاع البيانات بشكل JSON إلى العميل باستخدام JsonResponse.
+2. دالة conversation_detail
+الهدف: عرض تفاصيل محادثة معينة بناءً على معرف المحادثة (pk).
+الخطوات:
+جلب المحادثة باستخدام get(pk=pk) وتصفية المحادثات التي تحتوي على المستخدم الحالي.
+تحويل بيانات المحادثة باستخدام ConversationDetailSerializer.
+إرسال التفاصيل بشكل JSON إلى العميل.
+3. دالة conversation_get_or_create
+الهدف: جلب محادثة بين المستخدم الحالي ومستخدم آخر معين أو إنشاء محادثة جديدة إذا لم تكن موجودة.
+الخطوات:
+جلب المستخدم الآخر باستخدام User.objects.get(pk=user_pk).
+تصفية المحادثات التي تضم كلا المستخدمين.
+إذا كانت المحادثة موجودة، يتم استخدام أول محادثة موجودة. وإذا لم تكن موجودة، يتم إنشاء محادثة جديدة وإضافة المستخدمين إليها.
+تحويل البيانات باستخدام ConversationDetailSerializer وإرسالها بشكل JSON.
+4. دالة conversation_send_message
+الهدف: إرسال رسالة داخل محادثة محددة.
+الخطوات:
+جلب المحادثة باستخدام get(pk=pk) والتأكد من أن المستخدم الحالي جزء من المحادثة.
+تحديد المستخدم المستلم للرسالة.
+إنشاء رسالة جديدة باستخدام ConversationMessage.objects.create.
+تحويل الرسالة باستخدام ConversationMessageSerializer وإرجاعها بشكل JSON.
+ملاحظات إضافية:
+الديكور @api_view(["GET"]): يحدد أن الدالة هي API وتدعم طريقة GET (يمكن أيضًا أن تدعم POST أو غيرها).
+JsonResponse: يستخدم لإرسال البيانات إلى العميل في شكل JSON.
+معالجة الأخطاء: لم تتم معالجة حالات الخطأ مثل عدم العثور على مستخدم أو محادثة، ويفضل إضافة استثناءات للتحقق من الأخطاء مثل DoesNotExist.
+تحسينات محتملة:
+إضافة مصادقة (authentication_classes) وصلاحيات (permission_classes) لضمان أن المستخدمين مصرح لهم بالوصول إلى هذه الدوال.
+التعامل مع حالات الخطأ باستخدام try-except لإرجاع استجابات مناسبة مثل Http404 أو استجابة خطأ مخصصة.
+هذا الكود يوفر بنية مرنة وسهلة للتعامل مع المحادثات والرسائل في تطبيقات الدردشة باستخدام Django REST Framework.
+
+"""
+
+from django.http import JsonResponse
+
+# 📝 لتحديد أن هذه الدالة هي API view
+# 🔐 لتحديد الكلاسات المسؤولة عن المصادقة
+# 🔑 لتحديد الكلاسات المسؤولة عن الصلاحيات
+from rest_framework.decorators import (
+    api_view,
+    authentication_classes,
+    permission_classes,
+)
+
+# 👤 استيراد نموذج المستخدم من التطبيق
+from account.models import User
+
+# 💬 استيراد النماذج الخاصة بالمحادثات والرسائل
+from .models import (
+    Conversation,
+    ConversationMessage,
+)
+
+# 🧩 تعريف السيريالايزر للمحادثات
+# 🔍 سيريالايزر لعرض تفاصيل المحادثة
+# 📝 سيريالايزر لعرض تفاصيل الرسائل
+from .serializers import (
+    ConversationSerializer,
+    ConversationDetailSerializer,
+    ConversationMessageSerializer,
+)
+
+
+# 🚀 هذا الديكور يتم تطبيقه لتحديد أن هذه دالة GET API
+# 📋 دالة لعرض جميع المحادثات الخاصة بالمستخدم
+@api_view(["GET"])
+def conversation_list(request):
+    # 🧐 تصفية المحادثات التي تضم المستخدم الحالي
+    conversations = Conversation.objects.filter(users__in=list([request.user]))
+    # 🧩 تحويل البيانات إلى الشكل المناسب
+    serializer = ConversationSerializer(conversations, many=True)
+
+    # 📡 إرسال البيانات إلى العميل في شكل JSON
+    return JsonResponse(serializer.data, safe=False)
+
+
+# 🚀 دالة لعرض تفاصيل محادثة معينة
+# 🔑 تحديد المحادثة باستخدام الـ pk
+@api_view(["GET"])
+def conversation_detail(request, pk):
+    # 🕵️‍♂️ جلب المحادثة باستخدام الـ pk
+    conversation = Conversation.objects.filter(users__in=list([request.user])).get(
+        pk=pk
+    )
+    # 🔍 تحويل بيانات المحادثة إلى الشكل المناسب
+    serializer = ConversationDetailSerializer(conversation)
+
+    # 📡 إرسال التفاصيل إلى العميل
+    return JsonResponse(serializer.data, safe=False)
+
+
+# 🚀 دالة للحصول على محادثة أو إنشائها إذا لم تكن موجودة
+# 👤 المستخدم المستهدف الذي سنتحقق من وجود محادثة معه
+@api_view(["GET"])
+def conversation_get_or_create(request, user_pk):
+    # 🔍 جلب المستخدم المستهدف باستخدام الـ pk
+    user = User.objects.get(pk=user_pk)
+
+    # 🧐 تصفية المحادثات التي تضم المستخدمين
+    conversations = Conversation.objects.filter(users__in=list([request.user])).filter(
+        users__in=list([user])
+    )
+
+    # ✅ إذا كانت المحادثة موجودة
+    if conversations.exists():
+        # 🔄 أخذ أول محادثة موجودة
+        conversation = conversations.first()
+    # 🚫 إذا لم تكن المحادثة موجودة
+    else:
+        # 🛠 إنشاء محادثة جديدة
+        conversation = Conversation.objects.create()
+        # 👥 إضافة المستخدمين إلى المحادثة
+        conversation.users.add(user, request.user)
+        # 💾 حفظ المحادثة الجديدة
+        conversation.save()
+
+    # 🧩 تحويل البيانات إلى الشكل المناسب
+    serializer = ConversationDetailSerializer(conversation)
+
+    # 📡 إرسال البيانات إلى العميل
+    return JsonResponse(serializer.data, safe=False)
+
+
+# 🚀 دالة لإرسال رسالة داخل المحادثة
+# 💬 إرسال رسالة إلى المحادثة المحددة
+@api_view(["POST"])
+def conversation_send_message(request, pk):
+    # 🕵️‍♂️ جلب المحادثة باستخدام الـ pk
+    conversation = Conversation.objects.filter(users__in=list([request.user])).get(
+        pk=pk
+    )
+
+    # 👥 التحقق من جميع المستخدمين في المحادثة
+    for user in conversation.users.all():
+        # ❌ استبعاد المستخدم الحالي
+        if user != request.user:
+            # 📤 تحديد المستلم
+            sent_to = user
+
+    conversation_message = ConversationMessage.objects.create(
+        # ✉️ إنشاء الرسالة
+        conversation=conversation,
+        # 📝 جلب نص الرسالة من البيانات المدخلة
+        body=request.data.get("body"),
+        # 🖊️ تحديد من أنشأ الرسالة
+        created_by=request.user,
+        # 📬 تحديد من أُرسلت إليه الرسالة
+        sent_to=sent_to,
+    )
+
+    # 🧩 تحويل البيانات إلى الشكل المناسب
+    serializer = ConversationMessageSerializer(conversation_message)
+
+    # 📡 إرسال الرسالة إلى العميل
+    return JsonResponse(serializer.data, safe=False)
+
+```
+
+### 💌 Chat Page [ urls.py ]
+
+#### 💌 App [ Chat ] Page [ urls.py ] 📝
+
+```
+urls.py
+```
+
+```python
+"""
+هذا الكود يوضح كيفية إعداد مسارات الـ URLs لتطبيق محادثات في Django باستخدام دالة path. إليك شرحًا تفصيليًا للرمز:
+
+1. استيراد path
+يتم استيراد دالة path من django.urls لإنشاء مسارات الـ URLs الخاصة بالتطبيق.
+2. استيراد وحدة api
+يتم استيراد وحدة api من نفس التطبيق الذي يحتوي على الدوال (واجهات برمجة التطبيقات) التي تم تعريفها سابقًا مثل conversation_list و conversation_detail.
+3. قائمة urlpatterns
+قائمة تحتوي على جميع المسارات المتاحة التي يقدمها التطبيق.
+تفاصيل كل مسار:
+عرض قائمة المحادثات
+
+المسار: "" (المسار الرئيسي للتطبيق).
+الدالة المستدعاة: api.conversation_list.
+الاسم: conversation_list لتسهيل الرجوع إلى هذا المسار في أماكن أخرى من التطبيق.
+عرض تفاصيل المحادثة
+
+المسار: "<uuid:pk>/"، حيث يتم تمرير الـ UUID الخاص بالمحادثة كجزء من الـ URL.
+الدالة المستدعاة: api.conversation_detail.
+الاسم: conversation_detail.
+إرسال رسالة جديدة في المحادثة
+
+المسار: "<uuid:pk>/send/".
+الدالة المستدعاة: api.conversation_send_message.
+الاسم: conversation_send_message.
+الحصول على محادثة مع مستخدم أو إنشاؤها
+
+المسار: "<uuid:user_pk>/get-or-create/".
+الدالة المستدعاة: api.conversation_get_or_create.
+الاسم: conversation_get_or_create.
+ملاحظات إضافية:
+يتم استخدام الـ UUID في المسارات لتحديد المحادثات والمستخدمين بشكل فريد.
+هذه المسارات تستخدم دوال API التي تم تعريفها مسبقًا وتعيد استجابات JSON.
+تحسينات محتملة:
+يمكن إضافة مصادقة وصلاحيات عند استدعاء هذه الدوال لضمان أمان التطبيق.
+يمكن إضافة استثناءات مخصصة للتعامل مع الأخطاء مثل Http404.
+هذا الكود يُعتبر جزءًا أساسيًا من أي تطبيق يعتمد على نظام المحادثات، حيث يوفر واجهات واضحة للوصول إلى المحادثات، عرض التفاصيل، وإرسال الرسائل.
+
+"""
+
+# 🛤️ استيراد دالة `path` لإنشاء مسارات URL
+from django.urls import path
+
+# 📦 استيراد وحدة `api` من نفس التطبيق
+from . import api
+
+# 🗺️ قائمة `urlpatterns` لتحديد جميع مسارات الـ URL التي يقدمها التطبيق
+urlpatterns = [
+    # 📋 عرض قائمة المحادثات (المسار الرئيسي)
+    path("", api.conversation_list, name="conversation_list"),
+    # 🔍 عرض تفاصيل المحادثة بناءً على الـ UUID الخاص بها
+    path("<uuid:pk>/", api.conversation_detail, name="conversation_detail"),
+    # ✉️ إرسال رسالة جديدة في المحادثة المحددة
+    # 📝 استدعاء دالة `conversation_send_message` من وحدة `api`
+    # 🏷️ اسم المسار لتحديده في أماكن أخرى
+    path(
+        "<uuid:pk>/send/",
+        api.conversation_send_message,
+        name="conversation_send_message",
+    ),
+    # 🛠️ الحصول على محادثة مع مستخدم أو إنشاؤها إذا لم تكن موجودة
+    # 🔄 استدعاء دالة `conversation_get_or_create` من وحدة `api`
+    # 🏷️ اسم المسار لاستخدامه في أماكن أخرى من التطبيق
+    path(
+        "<uuid:user_pk>/get-or-create/",
+        api.conversation_get_or_create,
+        name="conversation_get_or_create",
+    ),
+]
+
+```
+
+### ⚙️ Project Page [ urls.py ]
+
+###### ⚙ Project Page [ urls.py ] 📝
+
+```
+# 📄 ملف [ messenger/messenger_django/messenger_django/urls.py ]
+
+# 🌐 Main URL Configuration for Django Project
+# 🌐 تكوين الروابط الرئيسية لمشروع Django
+
+from django.contrib import admin
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # ...
+    #
+    path('api/chat/', include('chat.urls')),
+    # ...
+]
+```
+
 ---
 
 ---

@@ -120,10 +120,15 @@ onMounted(() => {
         </aside>
         <div class="data_profile flex p-8">
           <!-- User Info -->
-          <div class="wrapper_info_data flex justify-between items-center" v-if="activeTab === '1'">
-            <div class="wrapper_old_data">
+          <div
+            class="wrapper_info_data flex justify-between items-center w-full"
+            v-if="activeTab === '1'"
+          >
+            <!-- User Info -->
+            <div class="wrapper_old_data w-6/12">
               <div class="inner_old_data flex justify-between items-end">
-                <prime_card class="w-96">
+                <prime_card class="w-full">
+                  <!-- <prime_card class="w-96"> -->
                   <template #header>
                     <!-- Owner Image -->
                     <div class="" v-if="userStore.user.id == user.id">
@@ -432,6 +437,7 @@ onMounted(() => {
                 </div>
               </form>
             </div>
+            <div v-else>else</div>
           </div>
           <!-- wrapper_password_data -->
           <div
@@ -505,7 +511,7 @@ onMounted(() => {
           <div class="w-full" v-if="activeTab === '3'">
             <div class="main-center col-span-2 space-y-4">
               <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl">Your Friends</h3>
+                <h3 class="text-3xl">Your Friends</h3>
                 <prime_button
                   type="button"
                   label="All Friends"
@@ -515,23 +521,35 @@ onMounted(() => {
                   outlined
                 />
               </div>
-              <div class="rounded-lg grid grid-cols-3 gap-4" v-if="friends.length">
+              <div
+                class="rounded-lg grid grid-cols-3 lg:grid-cols-5 md:grid-cols-3 gap-6"
+                v-if="friends.length"
+              >
                 <div
-                  class="p-4 text-center border shadow-xl rounded-lg"
+                  class="p-4 text-center shadow-lg hover:shadow-xl rounded-lg"
                   v-for="user in friends"
                   v-bind:key="user.id"
+                  style="position: relative"
                 >
-                  <img :src="user.get_avatar" class="mb-6 rounded-full h-32 w-32 m-auto" />
-                  <p>
+                  <img :src="user.get_cover" class="h-32 md:h-20 lg:h-32 w-full m-auto" />
+                  <div style="position: relative">
+                    <img
+                      :src="user.get_avatar"
+                      class="mb-1 rounded-full h-14 md:h-10 w-14 md:w-10 m-auto"
+                      style="margin-top: -7px; position: absolute; top: -15px; left: 10px"
+                    />
+                  </div>
+                  <p></p>
+                  <p class="mt-12 md:mt-8">
                     <strong @click="activeTab = '1'">
                       <RouterLink :to="{ name: 'profile', params: { id: user.id } }">{{
                         user.name
                       }}</RouterLink>
                     </strong>
                   </p>
-                  <div class="mt-6 flex space-x-8 justify-around">
+                  <div class="mt-4 flex space-x-8 justify-around">
                     <p class="text-xs text-gray-500">{{ user.friends_count }} friends</p>
-                    <p class="text-xs text-gray-500">{{ user.task_count }} Tasks</p>
+                    <p class="text-xs text-gray-500">{{ user.email }}</p>
                   </div>
                 </div>
               </div>
