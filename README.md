@@ -2,7 +2,6 @@
 
 Messenger
 
-
 ## 📦 Django
 
 - 🚀 Activate Virtual Environment 🔋
@@ -63,8 +62,7 @@ cd messenger_vuepress
 npm run docs:dev
 ```
 
-# ___________________________
-
+# ************\_\_\_************
 
 ###### 📝 Create File Gitignore
 
@@ -78,33 +76,25 @@ npm run docs:dev
 node_modules/
 ```
 
-###### 📋 Review changes and formulate change action
-
-###### 📋 مراجعة التغييرات وصياغة إجراء التغيير
+###### 📋 Review changes and formulate change action 📋 مراجعة التغييرات وصياغة إجراء التغيير
 
 ```cmd
 git status
 ```
 
-###### 📂 Add all new and changed files to the Staging Area.
-
-###### 📂 أضف كل الملفات الجديدة والمغير إلى منطقة التدريج.
+###### 📂 Add all new and changed files to the Staging Area. 📂 أضف كل الملفات الجديدة والمغير إلى منطقة التدريج.
 
 ```
 git add *
 ```
 
-###### 💾 This command sends the file from the Staging Area to the Local Repo.
-
-###### 💾 يرسل هذا الأمر الملف من منطقة التدريج إلى الريبو المحلي.
+###### 💾 This command sends the file from the Staging Area to the Local Repo. 💾 يرسل هذا الأمر الملف من منطقة التدريج إلى الريبو المحلي.
 
 ```cmd
 git commit -m "Commit Explain Code"
 ```
 
-###### 🌐 This command sends files from (Local Repo) to (Remote Repo).
-
-###### 🌐 يرسل هذا الأمر ملفات من (repo المحلي) إلى (ريبو عن بعد).
+###### 🌐 This command sends files from (Local Repo) to (Remote Repo). 🌐 يرسل هذا الأمر ملفات من (repo المحلي) إلى (ريبو عن بعد).
 
 ```cmd
 git push origin main
