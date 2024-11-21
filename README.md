@@ -2,6 +2,10 @@
 
 Messenger
 
+# Preview Website Image
+
+![This is an image](https://raw.githubusercontent.com/LearnCodingEasy/Messenger/refs/heads/main/messenger_vue/src/assets/Images/Login.png)
+
 ## 📦 Django
 
 - 🚀 Activate Virtual Environment 🔋
@@ -108,14 +112,14 @@ git push origin main
 
 # Vue Libraries
 
-1 - 1️⃣ Tailwind
-2 - 2️⃣ PrimeVue
-3 - 3️⃣ scss
-4 - 4️⃣ Axios
-5 - 5️⃣ Font Awesome
-6 - 6️⃣ Pwa
-7 - 7️⃣ Prism
-8 - 8️⃣ Swiper
+1. - 1️⃣ Tailwind
+2. - 2️⃣ PrimeVue
+3. - 3️⃣ scss
+4. - 4️⃣ Axios
+5. - 5️⃣ Font Awesome
+6. - 6️⃣ Pwa
+7. - 7️⃣ Prism
+8. - 8️⃣ Swiper
 
 # BackEnd Language
 
@@ -123,10 +127,10 @@ git push origin main
 
 # Django Libraries
 
-1 - 🌐 Django Rest Framework
-2 - 🔒 Django Rest Framework Simplejwt 🛡️
-3 - 🌍 Django Cors Headers 🔗
-4 - 🖼️ pillow 📷
+1. - 🌐 Django Rest Framework
+2. - 🔒 Django Rest Framework Simplejwt 🛡️
+3. - 🌍 Django Cors Headers 🔗
+4. - 🖼️ pillow 📷
 
 # Plugins
 
@@ -135,7 +139,3 @@ git push origin main
 # Website Demo
 
 Link [Demo](https://learncodingeasy.github.io/RepositoryName/dist/index.html)
-
-# Preview Website Image
-
-![This is an image](https://raw.githubusercontent.com/LearnCodingEasy/Messenger/refs/heads/main/messenger_vue/src/assets/Images/Login.png)
