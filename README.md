@@ -13,6 +13,42 @@
 
 ![This is an image](https://raw.githubusercontent.com/LearnCodingEasy/Messenger/refs/heads/main/messenger_vue/src/assets/Images/Login.png)
 
+# FrontEnd Language
+
+1. Html
+2. Css
+3. Javascript
+
+# Vue Libraries
+
+1. - 1️⃣ Tailwind
+2. - 2️⃣ PrimeVue
+3. - 3️⃣ scss
+4. - 4️⃣ Axios
+5. - 5️⃣ Font Awesome
+6. - 6️⃣ Pwa
+7. - 7️⃣ Prism
+8. - 8️⃣ Swiper
+
+# BackEnd Language
+
+1. Django
+
+# Django Libraries
+
+1. - 🌐 Django Rest Framework
+2. - 🔒 Django Rest Framework Simplejwt 🛡️
+3. - 🌍 Django Cors Headers 🔗
+4. - 🖼️ pillow 📷
+
+# Plugins
+
+- Name [Demo](https://learncodingeasy.github.io/RepositoryName/dist/index.html)
+
+# Website Demo
+
+Link [Demo](https://learncodingeasy.github.io/RepositoryName/dist/index.html)
+
 ## 📦 Django
 
 - 🚀 Activate Virtual Environment 🔋
@@ -110,39 +146,3 @@ git commit -m "Commit Explain Code"
 ```cmd
 git push origin main
 ```
-
-# FrontEnd Language
-
-1. Html
-2. Css
-3. Javascript
-
-# Vue Libraries
-
-1. - 1️⃣ Tailwind
-2. - 2️⃣ PrimeVue
-3. - 3️⃣ scss
-4. - 4️⃣ Axios
-5. - 5️⃣ Font Awesome
-6. - 6️⃣ Pwa
-7. - 7️⃣ Prism
-8. - 8️⃣ Swiper
-
-# BackEnd Language
-
-1. Django
-
-# Django Libraries
-
-1. - 🌐 Django Rest Framework
-2. - 🔒 Django Rest Framework Simplejwt 🛡️
-3. - 🌍 Django Cors Headers 🔗
-4. - 🖼️ pillow 📷
-
-# Plugins
-
-- Name [Demo](https://learncodingeasy.github.io/RepositoryName/dist/index.html)
-
-# Website Demo
-
-Link [Demo](https://learncodingeasy.github.io/RepositoryName/dist/index.html)

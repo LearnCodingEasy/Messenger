@@ -3,6 +3,7 @@
 <template>
   <main class="" style="position: sticky; top: 0; left: 0">
     <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
+      <!--  -->
       <div class="main-left col-span-1">
         <div class="p-4 bg-white border border-gray-200 rounded-lg">
           <div class="space-y-4">
@@ -45,7 +46,7 @@
           </div>
         </div>
       </div>
-
+      <!--  -->
       <div class="main-center col-span-3 space-y-4 h-dvh overflow-hidden">
         <div class="bg-white border border-gray-200 rounded-lg">
           <div class="flex flex-col flex-grow p-4">
@@ -83,7 +84,7 @@
             </template>
           </div>
         </div>
-
+        <!--  -->
         <div class="bg-white border border-gray-200 rounded-lg">
           <form v-on:submit.prevent="submitForm">
             <div class="p-4">
@@ -95,7 +96,10 @@
             </div>
 
             <div class="p-4 border-t border-gray-100 flex justify-between">
-              <button class="inline-block py-4 px-6 bg-purple-600 text-white rounded-lg">
+              <button
+                class="inline-block py-4 px-6 text-white rounded-lg"
+                style="background-image: linear-gradient(to right, #5b66f6, #e54da4)"
+              >
                 Send
               </button>
             </div>
@@ -223,7 +227,7 @@ export default {
         })
         .then((response) => {
           console.log(response.data)
-
+          this.body = ``
           this.activeConversation.messages.push(response.data)
         })
         .catch((error) => {

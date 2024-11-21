@@ -143,12 +143,6 @@ let logout = () => {
                             <RouterLink to="/" class="rounded-md px-3 py-2 text-md"
                               >Mobile
                             </RouterLink>
-                            <prime_button
-                              icon="pi pi-plus"
-                              severity="info"
-                              @click="visibleAddBoard = true"
-                              class="class_name"
-                            />
                           </div>
                         </div>
                       </div>
@@ -156,8 +150,12 @@ let logout = () => {
                         class="header_wrapper_profile_search absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
                       >
                         <!-- input_search -->
-                        <div class="header_input_search">
-                          <prime_input_text></prime_input_text>
+                        <div class="header_input_search border-2">
+                          <prime_input_text
+                            class="rounded-md border-black border-2"
+                            size="large"
+                            placeholder="Search"
+                          ></prime_input_text>
                         </div>
                         <button
                           type="button"
