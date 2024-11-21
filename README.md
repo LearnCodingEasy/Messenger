@@ -1,6 +1,13 @@
 # Messenger
 
-Messenger
+- 🌟 Interactive User Interface: Designed using Vue.js for a smooth and engaging user experience.
+- 💬 Instant Messaging Support: Allows real-time sending and receiving of messages.
+- 🔐 Identity Verification: Uses Django REST Framework SimpleJWT for secure login and identity verification.
+- 👤 User Management: Enables account creation and management of user profiles.
+- 🛎️ Notifications: Users receive notifications for new messages.
+- 🎨 Interface Customization: Tailwind and PrimeVue libraries used for customizable design and user experience.
+- 📱 PWA Support: Installable as a Progressive Web App (PWA) on mobile devices.
+- 🔍 Search Capability: Easily search conversations or users.
 
 # Preview Website Image
 
