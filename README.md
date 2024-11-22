@@ -1,5 +1,7 @@
 # Messenger
 
+## Description
+
 - 🌟 Interactive User Interface: Designed using Vue.js for a smooth and engaging user experience.
 - 💬 Instant Messaging Support: Allows real-time sending and receiving of messages.
 - 🔐 Identity Verification: Uses Django REST Framework SimpleJWT for secure login and identity verification.
@@ -15,9 +17,10 @@
 
 # FrontEnd Language
 
-1. Html
-2. Css
-3. Javascript
+1. Vue
+2. Html
+3. Css
+4. Javascript
 
 # Vue Libraries
 
@@ -25,7 +28,7 @@
 2. - 2️⃣ PrimeVue
 3. - 3️⃣ scss
 4. - 4️⃣ Axios
-5. - 5️⃣ Font Awesome
+5. - 5️⃣ Fontawesome
 6. - 6️⃣ Pwa
 7. - 7️⃣ Prism
 8. - 8️⃣ Swiper
@@ -109,7 +112,11 @@ cd messenger_vuepress
 npm run docs:dev
 ```
 
-# \***\*\*\*\*\*\*\***\_\_\_\***\*\*\*\*\*\*\***
+# **\*\*\*\***\*\*\*\***\*\*\*\***\_**\*\*\*\***\*\*\*\***\*\*\*\***
+
+# **\*\*\*\***\*\*\*\***\*\*\*\***\_**\*\*\*\***\*\*\*\***\*\*\*\***
+
+# **\*\*\*\***\*\*\*\***\*\*\*\***\_**\*\*\*\***\*\*\*\***\*\*\*\***
 
 ###### 📝 Create File Gitignore
 

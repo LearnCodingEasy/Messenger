@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import axios from 'axios'
+</script>
 
 <template>
   <main class="" style="position: sticky; top: 0; left: 0">
@@ -9,7 +11,7 @@
           <div class="space-y-4">
             <div v-if="conversations.length" class="if_user_have_conversations">
               <div
-                class="flex items-center justify-between my-2 wrapper_control_conversation"
+                class="flex items-center justify-between my-2 wrapper_control_conversation cursor-pointer"
                 v-for="conversation in conversations"
                 v-bind:key="conversation.id"
                 v-on:click="setActiveConversation(conversation.id)"
@@ -19,7 +21,7 @@
                     <img
                       v-if="user.id !== userStore.user.id"
                       :src="user.get_avatar"
-                      class="h-14 w-14 rounded-full"
+                      class="h-10 w-10 rounded-full"
                     />
 
                     <p class="text-xs font-bold" v-if="user.id !== userStore.user.id">
@@ -98,7 +100,7 @@
             <div class="p-4 border-t border-gray-100 flex justify-between">
               <button
                 class="inline-block py-4 px-6 text-white rounded-lg"
-                style="background-image: linear-gradient(to right, #5b66f6, #e54da4)"
+                style="background-image: linear-gradient(to right, #5b66f6, #5b66f6)"
               >
                 Send
               </button>
@@ -111,7 +113,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { useUserStore } from '@/stores/user'
 
 export default {
@@ -187,7 +188,6 @@ export default {
           console.log(error)
         })
     },
-
     // 🧑 Get All Friends
     getFriends() {
       axios
@@ -237,8 +237,3 @@ export default {
   },
 }
 </script>
-
-<!--
-
-
--->

@@ -118,7 +118,7 @@ let logout = () => {
                           <!-- Logo -->
                           <RouterLink to="/" class="logo flex items-center">
                             <img
-                              class="h-10 w-auto"
+                              class="h-8 w-8"
                               src="./assets/Images/Messenger_80x80.png"
                               alt="Your Company"
                             />
