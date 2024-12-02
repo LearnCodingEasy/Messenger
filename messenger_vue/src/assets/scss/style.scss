@@ -1,6 +1,7 @@
-@import 'Framework/Framework';
-@import 'Login/Login';
-@import 'Profile/Profile';
+@use 'Framework/Framework';
+@use 'Header/Header';
+@use 'Login/Login';
+@use 'Profile/Profile';
 
 /* For Scrollbar */
 ::-webkit-scrollbar {

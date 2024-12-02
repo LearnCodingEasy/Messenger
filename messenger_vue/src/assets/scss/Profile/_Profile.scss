@@ -47,7 +47,10 @@
           margin-bottom: 0.5rem;
           border-radius: 0.5rem;
           cursor: pointer;
-
+          border: 1px solid transparent;
+          &.activeView {
+            border: 0.1rem solid rgb(255, 255, 255);
+          }
           .user_image_icon,
           .user_name_icon,
           .user_email_icon,

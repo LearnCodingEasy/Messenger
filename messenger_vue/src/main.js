@@ -1,20 +1,22 @@
-// Page [ messenger/messenger_vue/src/main.js ]
-
+// استيراد ملف CSS الرئيسي للمشروع
 import './assets/main.css'
 
 // My Style
-import "./assets/scss/style.scss"
+// استيراد ملف SCSS الخاص بالتصميم
+import "./assets/scss/style.scss";
 
+// استيراد دالة createApp من Vue لإنشاء التطبيق
 import { createApp } from 'vue'
+
+// استيراد Pinia لإدارة الحالة (State Management) في Vue
 import { createPinia } from 'pinia'
 
-import App from './App.vue'
-import router from './router'
-// Axios  Import
-// Axios  استيراد
-import axios from "axios";
-axios.defaults.baseURL = "http://127.0.0.1:8000";
+// استيراد المكون الرئيسي للتطبيق
 
+import App from './App.vue'
+
+// استيراد إعدادات التوجيه (Vue Router)
+import router from './router'
 
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -22,77 +24,80 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
-// Add Free Icons Styles To SVG Core
+// إضافة أيقونات Font Awesome إلى مكتبة SVG
 library.add(fas, far, fab);
 
+// Axios  Import
+// استيراد مكتبة Axios للتعامل مع طلبات HTTP
+import axios from "axios";
+// تعيين الـ base URL الخاص بـ Axios
+axios.defaults.baseURL = "http://127.0.0.1:8000";
+
+// أثناء التطوير
+// axios.defaults.baseURL = "http://192.168.1.5:8000";
+
 // --------------- PrimeVue Core Configuration ---------------
-// Import PrimeVue library configuration
-// استيراد مكتبة PrimeVue وإعداداتها الأساسية
+// Import PrimeVue library configuration  استيراد إعدادات مكتبة
 import PrimeVue from "primevue/config";
 
 // --------------- Popup Services (For Dialogs and Confirmations) ---------------
 // Import services for confirmation and dialog popups
-// خدمات النوافذ المنبثقة لتأكيد العمليات وفتح الحوارات
-import ConfirmationService from 'primevue/confirmationservice';
-import DialogService from 'primevue/dialogservice';
+// استيراد خدمات النوافذ المنبثقة لتأكيد العمليات وفتح الحوارات
+import ConfirmationService from "primevue/confirmationservice";
+import DialogService from "primevue/dialogservice";
 
 // Buttons
-// الأزرار وزر التبديل
-import Button from 'primevue/button';
-import ToggleButton from 'primevue/togglebutton';
-
+// استيراد مكونات الأزرار وزر التبديل
+import Button from "primevue/button";
+import ToggleButton from "primevue/togglebutton";
 
 // --------------- Form Components ---------------
-// Import components for creating forms
-// عناصر النماذج
-import Fluid from 'primevue/fluid';
-import InputText from 'primevue/inputtext';
-import Textarea from 'primevue/textarea';
-import Password from 'primevue/password';
-import FloatLabel from 'primevue/floatlabel';
-import Checkbox from 'primevue/checkbox';
-import RadioButton from 'primevue/radiobutton';
-import Listbox from 'primevue/listbox';
-import DatePicker from 'primevue/datepicker';
-import InputGroup from 'primevue/inputgroup';
-import InputGroupAddon from 'primevue/inputgroupaddon';
-import ColorPicker from 'primevue/colorpicker';
+// Import components for creating forms استيراد عناصر النماذج
+import Fluid from "primevue/fluid";
+import InputText from "primevue/inputtext";
+import Textarea from "primevue/textarea";
+import Password from "primevue/password";
+import FloatLabel from "primevue/floatlabel";
+import Checkbox from "primevue/checkbox";
+import RadioButton from "primevue/radiobutton";
+import Listbox from "primevue/listbox";
+import DatePicker from "primevue/datepicker";
+import InputGroup from "primevue/inputgroup";
+import InputGroupAddon from "primevue/inputgroupaddon";
+import ColorPicker from "primevue/colorpicker";
 
 // --------------- File Components ---------------
-// Import file upload
-// تحميل الملفات
-import FileUpload from 'primevue/fileupload';
+// Import file upload استيراد مكونات تحميل الملفات
+import FileUpload from "primevue/fileupload";
 
 // --------------- Menu Components ---------------
-// Import components for building menus
-// عناصر القائمة
-import Menubar from 'primevue/menubar';
-import TieredMenu from 'primevue/tieredmenu';
+// Import components for building menus استيراد مكونات القائمة
+import Menubar from "primevue/menubar";
+import TieredMenu from "primevue/tieredmenu";
 
 // --------------- Image Components ---------------
-// Import components for handling images and avatars
-// مكونات الصور والأفاتار
-import Image from 'primevue/image';
-import Avatar from 'primevue/avatar';
-import AvatarGroup from 'primevue/avatargroup';
+// Import components for handling images and avatars استيراد مكونات الصور
+import Image from "primevue/image";
+import Avatar from "primevue/avatar";
+import AvatarGroup from "primevue/avatargroup";
 
 // --------------- Popup Components ---------------
 // Import popover, dialog, and drawer components for popups
-// مكونات النوافذ المنبثقة
-import Popover from 'primevue/popover';
-import Dialog from 'primevue/dialog';
-import Drawer from 'primevue/drawer';
+// استيراد مكونات النوافذ المنبثقة مثل Popover و Dialog و Drawer
+import Popover from "primevue/popover";
+import Dialog from "primevue/dialog";
+import Drawer from "primevue/drawer";
 
 // --------------- Panel Components ---------------
 // Import panel-related components for layout and navigation
-// مكونات اللوحات لعرض المعلومات المنظمة
-import Fieldset from 'primevue/fieldset';
-import Stepper from 'primevue/stepper';
-import StepList from 'primevue/steplist';
-import StepPanels from 'primevue/steppanels';
-import StepItem from 'primevue/stepitem';
-import Step from 'primevue/step';
-import StepPanel from 'primevue/steppanel';
+// استيراد مكونات اللوحات لعرض المعلومات المنظمة مثل Fieldset و Stepper
+import Fieldset from "primevue/fieldset";
+import Stepper from "primevue/stepper";
+import StepList from "primevue/steplist";
+import StepPanels from "primevue/steppanels";
+import StepItem from "primevue/stepitem";
+import Step from "primevue/step";
+import StepPanel from "primevue/steppanel";
 
 // --------------- Card Components ---------------
 // Import card component for displaying content in card format
@@ -100,151 +105,168 @@ import StepPanel from 'primevue/steppanel';
 import Card from 'primevue/card';
 
 // --------------- Theme Components ---------------
-// Import theme presets and theme switcher component
-// مكونات اللوحات لعرض المعلومات المنظمة
-import Noir from './presets/Noir.js';
-import ThemeSwitcher from './components/Theme/ThemeSwitcher.vue';
+// استيراد مكونات السمات مثل Noir و ThemeSwitcher
+import Noir from "./presets/Noir.js";
+import ThemeSwitcher from "./components/Theme/ThemeSwitcher.vue";
 
 // --------------- Notification Components ---------------
-// Import toast and message components for notifications
-import Toast from 'primevue/toast';
-import ToastService from 'primevue/toastservice';
-import Message from 'primevue/message';
+// استيراد مكونات التنبيهات مثل Toast و Message
+import Toast from "primevue/toast";
+import ToastService from "primevue/toastservice";
+import Message from "primevue/message";
 
 // --------------- Icon Components ---------------
-// Import icon components for enhanced UI elements
-import IconField from 'primevue/iconfield';
-import InputIcon from 'primevue/inputicon';
+// استيراد مكونات الأيقونات
+import IconField from "primevue/iconfield";
+import InputIcon from "primevue/inputicon";
 
 // --------------- Editor Components ---------------
-// Import rich text editor component (Quill-based)
-import Editor from 'primevue/editor';
+// استيراد مكون محرر النصوص الغني (Quill-based)
+import Editor from "primevue/editor";
 
 // --------------- Table Components ---------------
-// Import table components for data presentation
-// Quill محرر النصوص الغنية المستندة إلى
-import DataTable from 'primevue/datatable';
-import Column from 'primevue/column';
-import ColumnGroup from 'primevue/columngroup';  // optional
-import Row from 'primevue/row';                 // optional
+// استيراد مكونات الجدول لعرض البيانات
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
+import ColumnGroup from "primevue/columngroup";  // اختياري
+import Row from "primevue/row";  // اختياري
 
 // --------------- Placeholder Components ---------------
-// Import skeleton component for loading placeholders
-import Skeleton from 'primevue/skeleton';
+// استيراد مكون Skeleton للتحميل المؤقت
+import Skeleton from "primevue/skeleton";
 
-// --------------- Placeholder Components ---------------
-// Badge is a small status indicator for another element.
-import Badge from 'primevue/badge';
-import OverlayBadge from 'primevue/overlaybadge';
+// --------------- Badge Components ---------------
+// استيراد مكونات الشارات
+import Badge from "primevue/badge";
+import OverlayBadge from "primevue/overlaybadge";
 
+// --------------- Carousel Components ---------------
+// استيراد مكون Carousel لعرض الصور أو المحتوى بشكل دوار
+import Carousel from 'primevue/carousel';
+
+// --------------- Tag Components ---------------
+// استيراد مكون Tag
+import Tag  from 'primevue/tag';
+
+// --------------- DataView Components ---------------
+// استيراد مكون DataView لعرض البيانات بطريقة مرنة
+import DataView from 'primevue/dataview';
+
+// --------------- Paginator Components ---------------
+// استيراد مكون Paginator للتنقل بين الصفحات
+import Paginator from 'primevue/paginator';
 
 // --------------- Styles ---------------
-// Import necessary styles for PrimeVue and Tailwind CSS
-import 'primeicons/primeicons.css';
-import 'tailwindcss/tailwind.css';
+// استيراد الأنماط الخاصة بـ PrimeVue و Tailwind CSS
+import "primeicons/primeicons.css";
+import "tailwindcss/tailwind.css";
+
 
 
 const app = createApp(App)
 
+app.use(createPinia())  // تفعيل Pinia لإدارة الحالة
+app.use(router, axios);  // تفعيل التوجيه و Axios
+
+// تعريف مكون FontAwesome
 // eslint-disable-next-line vue/multi-word-component-names
 app.component("fa", FontAwesomeIcon);
-app.use(createPinia())
-app.use(router, axios);
-
 
 // --------------- Initialize PrimeVue ---------------
-// Configure and initialize PrimeVue with theme settings
 app.use(PrimeVue, {
   theme: {
-      preset: Noir,
-      options: {
-          prefix: 'p',
-          darkModeSelector: '.p-dark',
-          cssLayer: false,
-      }
+    preset: Noir,  // تعيين السمة المبدئية
+    options: {
+      prefix: "p",
+      darkModeSelector: ".p-dark",
+      cssLayer: false
+    }
   }
 });
 
-// Initialize and add services
 // تهيئة وإضافة الخدمات
 app.use(ConfirmationService);
 app.use(DialogService);
 app.use(ToastService);
 
 // --------------- Register Components ---------------
-// Register components in the application for global usage
-// Prime Button
-app.component('prime_button', Button);
+app.component("prime_button", Button);
+app.component("ThemeSwitcher", ThemeSwitcher);
+app.component("prime_fluid", Fluid);
+app.component("prime_input_text", InputText);
+app.component("prime_textarea", Textarea);
+app.component("prime_input_password", Password);
+app.component("prime_float_label", FloatLabel);
+app.component("prime_check_box", Checkbox);
+app.component("prime_radio_button", RadioButton);
+app.component("prime_list_box", Listbox);
+app.component("prime_date_picker", DatePicker);
+app.component("prime_input_group", InputGroup);
+app.component("prime_input_group_addon", InputGroupAddon);
+app.component("prime_file_upload", FileUpload);
+app.component("prime_toggle_button", ToggleButton);
+app.component("prime_color_picker", ColorPicker);
 
-// Theme Switcher Component
-// مكون تبديل السمة
-app.component('ThemeSwitcher', ThemeSwitcher);
+// مكونات القائمة
+app.component("prime_menubar", Menubar);
+app.component("prime_tiered_menu", TieredMenu);
 
-// Form Components
-app.component('prime_fluid', Fluid);
-app.component('prime_input_text', InputText);
-app.component('prime_textarea', Textarea);
-app.component('prime_input_password', Password);
-app.component('prime_float_label', FloatLabel);
-app.component('prime_check_box', Checkbox);
-app.component('prime_radio_button', RadioButton);
-app.component('prime_list_box', Listbox);
-app.component('prime_date_picker', DatePicker);
-app.component('prime_input_group', InputGroup);
-app.component('prime_input_group_addon', InputGroupAddon);
-app.component('prime_file_upload', FileUpload);
-app.component('prime_toggle_button', ToggleButton);
-app.component('prime_color_picker', ColorPicker);
+// مكونات الصور
+app.component("prime_image", Image);
+app.component("prime_avatar", Avatar);
+app.component("prime_avatar_group", AvatarGroup);
 
-// Menu Components
-app.component('prime_menubar', Menubar);
-app.component('prime_tiered_menu', TieredMenu);
+// مكونات البطاقة
+app.component("prime_card", Card);
 
-// Image Components
-app.component('prime_image', Image);
-app.component('prime_avatar', Avatar);
-app.component('prime_avatar_group', AvatarGroup);
+// مكونات النوافذ المنبثقة
+app.component("prime_popover", Popover);
+app.component("prime_dialog", Dialog);
+app.component("prime_drawer", Drawer);
 
-// Card Components
-app.component('prime_card', Card);
+// مكونات اللوحات
+app.component("prime_fieldset", Fieldset);
+app.component("prime_stepper", Stepper);
+app.component("prime_steplist", StepList);
+app.component("prime_steppanels", StepPanels);
+app.component("prime_stepitem", StepItem);
+app.component("prime_step", Step);
+app.component("prime_steppanel", StepPanel);
 
-// Popup Components
-app.component('prime_popover', Popover);
-app.component('prime_dialog', Dialog);
-app.component('prime_drawer', Drawer);
+// مكونات التنبيهات
+app.component("prime_toast", Toast);
+app.component("prime_message", Message);
 
-// Panel Components
-app.component('prime_fieldset', Fieldset);
-app.component('prime_stepper', Stepper);
-app.component('prime_steplist', StepList);
-app.component('prime_steppanels', StepPanels);
-app.component('prime_stepitem', StepItem);
-app.component('prime_step', Step);
-app.component('prime_steppanel', StepPanel);
+// مكونات الأيقونات
+app.component("prime_icon_field", IconField);
+app.component("prime_input_icon", InputIcon);
 
-// Notification Components
-app.component('prime_toast', Toast);
-app.component('prime_message', Message);
+// مكون المحرر
+app.component("prime_editor", Editor);
 
-// Icon Components
-app.component('prime_icon_field', IconField);
-app.component('prime_input_icon', InputIcon);
+// مكونات الجدول
+app.component("prime_data_table", DataTable);
+app.component("prime_column", Column);
+app.component("prime_column_group", ColumnGroup);
+app.component("prime_row", Row);
 
-// Editor Component
-app.component('prime_editor', Editor);
+// مكونات التحميل المؤقت
+app.component("prime_skeleton", Skeleton);
 
-// Table Components
-app.component('prime_data_table', DataTable);
-app.component('prime_column', Column);
-app.component('prime_column_group', ColumnGroup);
-app.component('prime_row', Row);
+// مكونات الشارات
+app.component("prime_badge", Badge);
+app.component("prime_overlay_badge", OverlayBadge);
 
-// Placeholder Components
-app.component('prime_skeleton', Skeleton);
+// مكون Carousel
+app.component("prime_carousel", Carousel);
 
-// Badge is a small status indicator for another element.
-app.component('prime_badge', Badge);
-app.component('prime_overlay_badge', OverlayBadge);
+// مكون Tag
+app.component("prime_tag", Tag);
 
+// مكونات DataView
+app.component("prime_data_view", DataView);
 
-app.mount('#app')
+// مكون Paginator
+app.component("prime_paginator", Paginator);
+
+app.mount('#app')  // تشغيل التطبيق على العنصر #app

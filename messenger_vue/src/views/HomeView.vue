@@ -1,9 +1,15 @@
 <script setup>
+import { RouterLink, RouterView } from 'vue-router'
 import axios from 'axios'
+
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore()
+userStore.initStore()
 </script>
 
 <template>
-  <main class="" style="position: sticky; top: 0; left: 0">
+  <main class="main wrapper_home_app" style="position: sticky; top: 0; left: 0">
     <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4">
       <!--  -->
       <div class="main-left col-span-1">
@@ -190,8 +196,9 @@ export default {
     },
     // 🧑 Get All Friends
     getFriends() {
+      const userStore = useUserStore()
       axios
-        .get(`/api/friends/${this.userStore.user.id}/`)
+        .get(`/api/friends/${userStore.user.id}/`)
         .then((response) => {
           // // For Test
           let line = '📌'.repeat(30)

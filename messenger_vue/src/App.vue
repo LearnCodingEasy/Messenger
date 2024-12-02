@@ -25,12 +25,6 @@ onMounted(() => {
   }
 })
 
-// For Toggle Theme
-// const op = ref(null)
-// const toggle = event => {
-//   // console.log('toggle: ', toggle);
-//   op.value.toggle(event)
-// }
 // Log Out
 let logout = () => {
   // console.log('User Log out')
@@ -43,10 +37,7 @@ let logout = () => {
 </script>
 
 <template>
-  <div
-    class="wrapper_page_app"
-    style="border: 1rem solid #000; height: 100vh; overflow-y: scroll; padding: 0.5rem"
-  >
+  <div class="wrapper_messenger_app">
     <!-- Header Tailwind -->
     <div class="header_wrapper sticky top-0 left-0 right-0">
       <div class="container mx-auto">
@@ -336,13 +327,11 @@ let logout = () => {
 export default {
   data() {
     return {
-      // تعريف الخاصية
-      visibleAddBoard: false,
       isDropdownOpen: false,
     }
   },
   mounted() {
-    document.title = 'Trello | Home'
+    document.title = 'Messenger | Home'
   },
   methods: {
     toggleDropdown() {
@@ -355,79 +344,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.header_right_section {
-  a,
-  RouterLink {
-    margin: 0 0.5rem;
-  }
-}
-
-.wrapper_page_app {
-  .header_wrapper {
-    border-bottom: 1px solid #99999985;
-    z-index: 7;
-    .container {
-      .header_inner {
-        .header_card {
-          border-radius: 0;
-          box-shadow: none;
-
-          > div {
-            padding: 0;
-
-            header.header_header {
-              nav.header_nav {
-                .header_content {
-                  .header_content_inner {
-                    .header_mobile_menu_button {
-                      button {
-                        border: 0.1rem solid #085dd8;
-                      }
-                    }
-
-                    .header_wrapper_links {
-                      .header_logo_link {
-                        .logo {
-                          img {
-                          }
-                        }
-                      }
-
-                      .header_main_links {
-                        .header_main_link {
-                          a {
-                          }
-
-                          button {
-                            background-color: #085dd8;
-                            border: 0;
-                            color: white;
-                          }
-                        }
-                      }
-                    }
-
-                    .header_wrapper_profile_search {
-                      .header_input_search {
-                        margin: 0 0.5rem;
-                        height: 30px;
-
-                        input {
-                          border-radius: 3px;
-                          height: 100%;
-                          box-shadow: none;
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-</style>
+<style lang="scss"></style>
